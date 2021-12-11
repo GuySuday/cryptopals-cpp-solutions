@@ -2,13 +2,16 @@ cmake_minimum_required(VERSION 3.0.0)
 
 set(CMAKE_CXX_STANDARD 11)
 
+# TODO: make it scalable
 set(
-    headers_sets
-    01_hex_to_base64.hpp
+  headers_sets
+  01_hex_to_base64.hpp
+  02_fixed_xor.hpp
 )
 set(
-    sources_sets
-    01_hex_to_base64.cpp
+  sources_sets
+  01_hex_to_base64.cpp
+  02_fixed_xor.cpp
 )
 
 add_library(SET1 STATIC ${headers_sets} ${sources_sets})
