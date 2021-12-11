@@ -4,6 +4,8 @@
 
 const int BASE64_TABLE_SIZE = 64;
 const int SEXTET_SIZE = 6;
+const int HEX_SIZE = 16;
+const int HEX_DIGIT_BINARY_SIZE = 4;
 const char base64_padding_char = '=';
 char base64_encoding_table[BASE64_TABLE_SIZE] = {
 	'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
@@ -15,7 +17,13 @@ char base64_encoding_table[BASE64_TABLE_SIZE] = {
 	'8', '9', '+', '/'
 };
 
-std::string hex_to_binary(std::string& hex_str)
+// TODO: don't really need this table
+char decimal_to_hex_table[HEX_SIZE] = {
+	'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+	'a', 'b', 'c', 'd', 'e', 'f'
+};
+
+std::string string_conversions::hex_to_binary(std::string& hex_str)
 {
 	std::string binary_str;
 	int binary_value = 0;
@@ -40,7 +48,7 @@ std::string hex_to_binary(std::string& hex_str)
 		}
 
 		std::string curr_binary_str;
-		for (int j = 3; j >= 0; j--)
+		for (int j = HEX_DIGIT_BINARY_SIZE - 1; j >= 0; j--)
 		{
 			curr_binary_str += ((1 << j) & binary_value) ? '1' : '0';
 		}
@@ -51,7 +59,7 @@ std::string hex_to_binary(std::string& hex_str)
 }
 
 
-int binary_to_decimal(const std::string& binary_str)
+int string_conversions::binary_to_decimal(std::string& binary_str)
 {
 	int decimal_value = 0;
 	for (int i = (binary_str.length() - 1); i >=0; i--)
@@ -65,7 +73,7 @@ int binary_to_decimal(const std::string& binary_str)
 	return decimal_value;
 }
 
-std::string binary_to_base64(const std::string& binary_str)
+std::string binary_to_base64(std::string& binary_str)
 {
 	std::string base64_str;
 	for (int i = 0; i < binary_str.length(); i += SEXTET_SIZE)
@@ -82,7 +90,7 @@ std::string binary_to_base64(const std::string& binary_str)
 			sextet_str = binary_str.substr(i, str_portion_size);
 			sextet_str.append(SEXTET_SIZE - str_portion_size, '0');
 		}
-		int decimal_value = binary_to_decimal(sextet_str);
+		int decimal_value = string_conversions::binary_to_decimal(sextet_str);
 		base64_str += base64_encoding_table[decimal_value];
 	}
 	// padding if necessary
@@ -100,8 +108,35 @@ std::string binary_to_base64(const std::string& binary_str)
 	return base64_str;
 }
 
-std::string string_conventions::hex_to_base64(std::string& hex_str)
+std::string string_conversions::hex_to_base64(std::string& hex_str)
 {
-	std::string binary_str = hex_to_binary(hex_str);
+	std::string binary_str = string_conversions::hex_to_binary(hex_str);
 	return binary_to_base64(binary_str);
+}
+
+// TODO: finish
+std::string string_conversions::binary_to_hex(std::string& binary_str)
+{
+	std::string hex_str;
+	if (binary_str.length() % 4 != 0)
+	{
+		// TODO: format HEX_DIGIT_BINARY_SIZE into the exception message
+		throw std::invalid_argument("binary string should be a multiplication of 4");
+	}
+	for (size_t i = 0; i < binary_str.length(); i += HEX_DIGIT_BINARY_SIZE)
+	{
+		int hex_value = 0;
+		for (size_t j = 0; j < HEX_DIGIT_BINARY_SIZE; j++)
+		{
+			char curr_char = binary_str[i + j];
+			if (curr_char == '1')
+			{
+				unsigned int exponent = HEX_DIGIT_BINARY_SIZE - j - 1;
+				hex_value += 1 << exponent;
+			}
+			std::cout << hex_value << std::endl;
+		}
+		hex_str += decimal_to_hex_table[hex_value];
+	}
+	return hex_str;
 }

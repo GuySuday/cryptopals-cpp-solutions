@@ -3,11 +3,12 @@
 
 #include <string>
 
-namespace string_conventions
+namespace string_conversions
 {
+    std::string hex_to_binary(std::string& hex_str);
     std::string hex_to_base64(std::string& hex_str);
-}
-int binary_to_decimal(const std::string& sextet_str);
-
+    std::string binary_to_hex(std::string& binary_str);
+    int binary_to_decimal(std::string& sextet_str);
+};
 
 #endif /* UTILS_STRING_CONVERTIONS */

@@ -14,5 +14,5 @@
 
 std::string s01::c01::hex_to_base64(std::string& hex_str)
 {
-	return string_conventions::hex_to_base64(hex_str);
+	return string_conversions::hex_to_base64(hex_str);
 }
