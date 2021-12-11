@@ -1,34 +1,19 @@
-cmake_minimum_required(VERSION 3.0.0)
+# Store all the test files under a variable
+file(GLOB TEST_FILES "test_*.cpp")
 
-
-# include_directories(
-#   ../sets/
-#   # ${PROJECT_SOURCE_DIR}/sets
-# )
-
-# file(GLOB Sources_Tests
-#      "*.hpp"
-#      "*.cpp"
-# )
-
-set(
-  Sources_Tests
-  test_hex_to_base64.cpp
-)
-
+# Compile all the test files to a single executable
 add_executable(
-  test_hex_to_base64
-  ${Sources_Tests}
+  tests
+  ${TEST_FILES}
 )
 
-
+# Link gtest and other dependency libraries to the tests executable
 target_link_libraries(
-  test_hex_to_base64
+  tests
   gtest_main
   UTILS
   SET1
 )
-  
-gtest_discover_tests(test_hex_to_base64)
-  
-# add_library(${This} TESTS ${Sources_Tests})
+
+# Adds the tests found in the tests executable
+gtest_discover_tests(tests)
