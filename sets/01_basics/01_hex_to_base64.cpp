@@ -3,7 +3,7 @@
 #include <stdlib.h> 
 
 #include "01_hex_to_base64.hpp"
-#include "../../utils/string_convertions.hpp"
+#include "../../utils/base_string_conversions.hpp"
 
 /* 
 	1) Convert hex to binary
@@ -14,5 +14,5 @@
 
 std::string s01::c01::hex_to_base64(std::string& hex_str)
 {
-	return string_conversions::hex_to_base64(hex_str);
+	return base_string_conversions::hex_to_base64(hex_str);
 }

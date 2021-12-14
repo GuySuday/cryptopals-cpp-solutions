@@ -1,9 +1,9 @@
-#ifndef UTILS_STRING_CONVERTIONS
-#define UTILS_STRING_CONVERTIONS
+#ifndef UTILS_BASE_STRING_CONVERSIONS_HPP_INCLUDED
+#define UTILS_BASE_STRING_CONVERSIONS_HPP_INCLUDED
 
 #include <string>
 
-namespace string_conversions
+namespace base_string_conversions
 {
     std::string hex_to_binary(std::string& hex_str);
     std::string hex_to_base64(std::string& hex_str);
@@ -11,4 +11,4 @@ namespace string_conversions
     int binary_to_decimal(std::string& sextet_str);
 };
 
-#endif /* UTILS_STRING_CONVERTIONS */
+#endif /* UTILS_BASE_STRING_CONVERSIONS_HPP_INCLUDED */

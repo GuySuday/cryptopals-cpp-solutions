@@ -5,13 +5,13 @@ set(CMAKE_CXX_STANDARD 11)
 # TODO: should we use file(...) here to make is scalable?
 set(
     Headers_utils
-    string_convertions.hpp
+    base_string_conversions.hpp
     xor_utils.hpp
     
 )
 set(
     Sources_utils
-    string_convertions.cpp
+    base_string_conversions.cpp
     xor_utils.cpp
 )
 

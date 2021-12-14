@@ -1,5 +1,5 @@
-#ifndef SETS_01_BASICS_02_FIXED_XOR
-#define SETS_01_BASICS_02_FIXED_XOR
+#ifndef SETS_01_BASICS_02_FIXED_XOR_HPP_INCLUDED
+#define SETS_01_BASICS_02_FIXED_XOR_HPP_INCLUDED
 
 #include <string>
 
@@ -11,4 +11,4 @@ namespace s01
     };
 };
 
-#endif /* SETS_01_BASICS_02_FIXED_XOR */
+#endif /* SETS_01_BASICS_02_FIXED_XOR_HPP_INCLUDED */

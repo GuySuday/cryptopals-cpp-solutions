@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "string_convertions.hpp"
+#include "base_string_conversions.hpp"
 
 const int BASE64_TABLE_SIZE = 64;
 const int SEXTET_SIZE = 6;
@@ -18,14 +18,14 @@ char base64_encoding_table[BASE64_TABLE_SIZE] =
 	'8', '9', '+', '/'
 };
 
-// TODO: don't really need this table
+// TODO: don't really need this table, can use the ASCII table instead
 char decimal_to_hex_table[HEX_SIZE] = 
 {
 	'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
 	'a', 'b', 'c', 'd', 'e', 'f'
 };
 
-std::string string_conversions::hex_to_binary(std::string& hex_str)
+std::string base_string_conversions::hex_to_binary(std::string& hex_str)
 {
 	std::string binary_str;
 	int binary_value = 0;
@@ -60,7 +60,7 @@ std::string string_conversions::hex_to_binary(std::string& hex_str)
 }
 
 
-int string_conversions::binary_to_decimal(std::string& binary_str)
+int base_string_conversions::binary_to_decimal(std::string& binary_str)
 {
 	int decimal_value = 0;
 	for (int i = (binary_str.length() - 1); i >=0; i--)
@@ -91,7 +91,7 @@ std::string binary_to_base64(std::string& binary_str)
 			sextet_str = binary_str.substr(i, str_portion_size);
 			sextet_str.append(SEXTET_SIZE - str_portion_size, '0');
 		}
-		int decimal_value = string_conversions::binary_to_decimal(sextet_str);
+		int decimal_value = base_string_conversions::binary_to_decimal(sextet_str);
 		base64_str += base64_encoding_table[decimal_value];
 	}
 	// padding if necessary
@@ -109,13 +109,13 @@ std::string binary_to_base64(std::string& binary_str)
 	return base64_str;
 }
 
-std::string string_conversions::hex_to_base64(std::string& hex_str)
+std::string base_string_conversions::hex_to_base64(std::string& hex_str)
 {
-	std::string binary_str = string_conversions::hex_to_binary(hex_str);
+	std::string binary_str = base_string_conversions::hex_to_binary(hex_str);
 	return binary_to_base64(binary_str);
 }
 
-std::string string_conversions::binary_to_hex(std::string& binary_str)
+std::string base_string_conversions::binary_to_hex(std::string& binary_str)
 {
 	std::string hex_str;
 	if (binary_str.length() % HEX_DIGIT_BINARY_SIZE != 0)
