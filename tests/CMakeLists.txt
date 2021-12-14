@@ -12,7 +12,7 @@ target_link_libraries(
   tests
   gtest_main
   UTILS
-  SET1
+  SET1 # TODO: maybe seperate tests according to sets?
 )
 
 # Adds the tests found in the tests executable

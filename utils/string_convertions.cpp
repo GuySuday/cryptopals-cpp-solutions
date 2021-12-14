@@ -7,7 +7,8 @@ const int SEXTET_SIZE = 6;
 const int HEX_SIZE = 16;
 const int HEX_DIGIT_BINARY_SIZE = 4;
 const char base64_padding_char = '=';
-char base64_encoding_table[BASE64_TABLE_SIZE] = {
+char base64_encoding_table[BASE64_TABLE_SIZE] = 
+{
 	'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
 	'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
 	'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd',
@@ -18,7 +19,8 @@ char base64_encoding_table[BASE64_TABLE_SIZE] = {
 };
 
 // TODO: don't really need this table
-char decimal_to_hex_table[HEX_SIZE] = {
+char decimal_to_hex_table[HEX_SIZE] = 
+{
 	'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
 	'a', 'b', 'c', 'd', 'e', 'f'
 };
@@ -44,7 +46,7 @@ std::string string_conversions::hex_to_binary(std::string& hex_str)
 		}
 		else
 		{
-			throw std::runtime_error("invalid hex value");
+			throw std::invalid_argument(std::string("invalid hex char: ") + curr_char);
 		}
 
 		std::string curr_binary_str;
@@ -54,7 +56,6 @@ std::string string_conversions::hex_to_binary(std::string& hex_str)
 		}
 		binary_str += curr_binary_str;
 	}
-	
 	return binary_str;
 }
 
@@ -114,14 +115,14 @@ std::string string_conversions::hex_to_base64(std::string& hex_str)
 	return binary_to_base64(binary_str);
 }
 
-// TODO: finish
 std::string string_conversions::binary_to_hex(std::string& binary_str)
 {
 	std::string hex_str;
-	if (binary_str.length() % 4 != 0)
+	if (binary_str.length() % HEX_DIGIT_BINARY_SIZE != 0)
 	{
-		// TODO: format HEX_DIGIT_BINARY_SIZE into the exception message
-		throw std::invalid_argument("binary string should be a multiplication of 4");
+		throw std::invalid_argument(
+			"binary string len should be a multiplication of " + std::to_string(HEX_DIGIT_BINARY_SIZE)
+		);
 	}
 	for (size_t i = 0; i < binary_str.length(); i += HEX_DIGIT_BINARY_SIZE)
 	{
@@ -134,7 +135,6 @@ std::string string_conversions::binary_to_hex(std::string& binary_str)
 				unsigned int exponent = HEX_DIGIT_BINARY_SIZE - j - 1;
 				hex_value += 1 << exponent;
 			}
-			std::cout << hex_value << std::endl;
 		}
 		hex_str += decimal_to_hex_table[hex_value];
 	}
