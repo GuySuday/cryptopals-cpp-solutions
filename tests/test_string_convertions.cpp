@@ -5,6 +5,15 @@
 class BinaryToDecimalTestFixture : public ::testing::TestWithParam<std::tuple<std::string, int>> { };
 class HexToBinaryTestFixture : public ::testing::TestWithParam<std::tuple<std::string, std::string>> { };
 
+// TODO: is there a way to combine the fixture tests (TEST_P) and the regular tests (TEST) under the same name?
+TEST(StringConvertions, hex_to_binary_invalid_hex)
+{
+    std::string invalid_hex_str = "not hex";
+    EXPECT_THROW(
+        string_conversions::hex_to_binary(invalid_hex_str),
+        std::invalid_argument
+    );
+}
 TEST_P(HexToBinaryTestFixture, hex_to_binary)
 {
     std::string hex_str = std::get<0>(GetParam());
@@ -17,6 +26,15 @@ TEST_P(BinaryToDecimalTestFixture, binary_to_decimal) {
     int expected_decimal =  std::get<1>(GetParam());;
     int decimal = string_conversions::binary_to_decimal(binary_str);
     EXPECT_EQ(decimal, expected_decimal);
+}
+
+TEST(StringConvertions, binary_to_hex_wrong_length)
+{
+    std::string binary_str = "010";
+    EXPECT_THROW(
+        string_conversions::binary_to_hex(binary_str),
+        std::invalid_argument
+    );
 }
 
 TEST(StringConvertions, binary_to_hex)
