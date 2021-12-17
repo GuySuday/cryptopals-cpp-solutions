@@ -7,11 +7,13 @@ set(
   headers_sets
   01_hex_to_base64.hpp
   02_fixed_xor.hpp
+  03_single_byte_xor_cipher.hpp
 )
 set(
   sources_sets
   01_hex_to_base64.cpp
   02_fixed_xor.cpp
+  03_single_byte_xor_cipher.cpp
 )
 
 add_library(SET1 STATIC ${headers_sets} ${sources_sets})

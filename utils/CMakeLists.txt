@@ -7,6 +7,7 @@ set(
     Headers_utils
     base_string_conversions.hpp
     xor_utils.hpp
+    types.hpp
     
 )
 set(
