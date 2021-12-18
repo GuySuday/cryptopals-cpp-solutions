@@ -14,7 +14,6 @@ namespace base_string_conversions
     std::string hex_to_base64(std::string& hex_str);
     std::string binary_to_hex(std::string& binary_str);
     int binary_to_decimal(std::string& binary_str);
-    std::string byte_to_binary(BYTE byte);
     std::string decimal_to_binary(int decimal, int binary_length); // TODO: does the `binary_length` param really necessary?
 };
 

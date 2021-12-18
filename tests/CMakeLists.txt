@@ -7,6 +7,7 @@ set(
   test_fixed_xor.cpp
   test_single_byte_xor_cipher.cpp
   test_detect_single_char_xor.cpp
+  test_repeating_key_xor.cpp
 )
 
 
