@@ -12,7 +12,7 @@ namespace s01
             std::string plaintext;
             std::string plaintext_hex;
         };
-        Result detect_single_char_xor(std::string file_path);
+        Result detect_single_char_xor(std::string& file_path);
     };
 };
 
