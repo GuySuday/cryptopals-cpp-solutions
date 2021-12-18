@@ -7,12 +7,13 @@ set(
     Headers_utils
     base_string_conversions.hpp
     xor_utils.hpp
+    plaintext_score_utils.hpp
     types.hpp
-    
 )
 set(
     Sources_utils
     base_string_conversions.cpp
+    plaintext_score_utils.cpp
     xor_utils.cpp
 )
 
