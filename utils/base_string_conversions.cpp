@@ -1,4 +1,6 @@
-#include <iostream>
+#include <array> // std::array
+#include <string> // std::string
+#include <algorithm> // std::find
 
 #include "base_string_conversions.hpp"
 
@@ -7,7 +9,7 @@ const int SEXTET_SIZE = 6;
 const int HEX_NUM_OF_DIGITS = 16;
 const int HEX_DIGIT_BITS_SIZE = 4;
 const unsigned char base64_padding_char = '=';
-unsigned char base64_encoding_table[BASE64_TABLE_SIZE] = 
+std::array<unsigned char, BASE64_TABLE_SIZE> base64_encoding_table =
 {
 	'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
 	'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
@@ -114,6 +116,30 @@ std::string base_string_conversions::hex_to_base64(std::string& hex_str)
 {
 	std::string binary_str = base_string_conversions::hex_to_binary(hex_str);
 	return binary_to_base64(binary_str);
+}
+
+std::string base_string_conversions::base64_to_binary(std::string& base64_str) 
+{
+	std::string binary_str;
+	for (size_t i = 0; i < base64_str.length(); i++)
+	{
+		auto it = std::find(base64_encoding_table.begin(), base64_encoding_table.end(), base64_str[i]);
+		if (it == base64_encoding_table.end())
+		{
+			continue;
+		}
+		int decimal = it - base64_encoding_table.begin();
+		std::string sextet_str = base_string_conversions::decimal_to_binary(decimal, SEXTET_SIZE);
+		binary_str += sextet_str;
+	}
+	// trimming padding
+	return binary_str.substr(0, binary_str.length() - (binary_str.length() % 8));
+}
+
+std::string base_string_conversions::base64_to_hex(std::string& base64_str) 
+{
+	std::string binary_str = base_string_conversions::base64_to_binary(base64_str);
+	return base_string_conversions::binary_to_hex(binary_str);
 }
 
 std::string base_string_conversions::binary_to_hex(std::string& binary_str)
