@@ -2,8 +2,8 @@
 #define UTILS_TYPES_HPP_INCLUDED
 
 /* types */
-typedef unsigned char BYTE; // TODO: is 'BYTE' the right name here?
-typedef unsigned char BIT;
+using BYTE = unsigned char; // TODO: is 'BYTE' the right name here?
+using BIT = unsigned char;
 
 /* types's metrics */
 const int BYTE_NUM_OF_BITS = 8;
