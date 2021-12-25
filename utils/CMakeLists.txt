@@ -11,6 +11,8 @@ set(
     types.hpp
     crypto_utils.hpp
     file_utils.hpp
+    vector_utils.hpp
+    collection_utils.hpp
 )
 set(
     Sources_utils
