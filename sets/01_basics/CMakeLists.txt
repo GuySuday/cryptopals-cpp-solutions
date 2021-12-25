@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 3.0.0)
 
-set(CMAKE_CXX_STANDARD 11)
-
 # TODO: make it scalable
 set(
   headers_sets
@@ -10,6 +8,7 @@ set(
   03_single_byte_xor_cipher.hpp
   04_detect_single_char_xor.hpp
   05_repeating_key_xor.hpp
+  06_break_repeating_key_xor.hpp
 )
 set(
   sources_sets
@@ -18,6 +17,7 @@ set(
   03_single_byte_xor_cipher.cpp
   04_detect_single_char_xor.cpp
   05_repeating_key_xor.cpp
+  06_break_repeating_key_xor.cpp
 )
 
 add_library(SET1 STATIC ${headers_sets} ${sources_sets})

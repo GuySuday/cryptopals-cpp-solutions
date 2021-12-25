@@ -9,6 +9,7 @@ set(
   test_single_byte_xor_cipher.cpp
   test_detect_single_char_xor.cpp
   test_repeating_key_xor.cpp
+  test_break_repeating_key_xor.cpp
 )
 
 
