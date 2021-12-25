@@ -9,12 +9,14 @@ set(
     xor_utils.hpp
     plaintext_score_utils.hpp
     types.hpp
+    crypto_utils.hpp
 )
 set(
     Sources_utils
     base_string_conversions.cpp
     plaintext_score_utils.cpp
     xor_utils.cpp
+    crypto_utils.cpp
 )
 
 add_library(${This} UTILS ${Headers_utils} ${Sources_utils})

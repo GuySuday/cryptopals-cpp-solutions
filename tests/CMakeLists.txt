@@ -2,6 +2,7 @@
 set(
   TEST_FILES
   test_base_string_conversions.cpp
+  test_crypto_utils.cpp
   test_xor_utils.cpp
   test_hex_to_base64.cpp
   test_fixed_xor.cpp
