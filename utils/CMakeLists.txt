@@ -10,6 +10,7 @@ set(
     plaintext_score_utils.hpp
     types.hpp
     crypto_utils.hpp
+    file_utils.hpp
 )
 set(
     Sources_utils
@@ -17,6 +18,7 @@ set(
     plaintext_score_utils.cpp
     xor_utils.cpp
     crypto_utils.cpp
+    file_utils.cpp
 )
 
 add_library(${This} UTILS ${Headers_utils} ${Sources_utils})
