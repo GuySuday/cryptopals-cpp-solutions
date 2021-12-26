@@ -1,7 +1,7 @@
 #include "05_repeating_key_xor.hpp"
 #include "../../utils/base_string_conversions.hpp"
 
-std::string s01::c05::repeating_key_xor(std::string& plaintext, std::vector<BYTE>& key) 
+std::string s01::c05::repeating_key_xor(std::string& plaintext, std::vector<BYTE>& key)
 {
     unsigned int key_len = key.size();
     std::string encryped_plaintext_binary;

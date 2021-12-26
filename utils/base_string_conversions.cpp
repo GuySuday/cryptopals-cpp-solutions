@@ -21,7 +21,7 @@ std::array<unsigned char, BASE64_TABLE_SIZE> base64_encoding_table =
 };
 
 // TODO: don't really need this table, can use the ASCII table instead
-unsigned char decimal_to_hex_table[HEX_NUM_OF_DIGITS] = 
+unsigned char decimal_to_hex_table[HEX_NUM_OF_DIGITS] =
 {
 	'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
 	'a', 'b', 'c', 'd', 'e', 'f'
@@ -66,7 +66,7 @@ std::string base_string_conversions::hex_to_binary(std::string& hex_str)
 int base_string_conversions::binary_to_decimal(std::string& binary_str)
 {
 	int decimal_value = 0;
-	for (int i = (binary_str.length() - 1); i >=0; i--)
+	for (int i = (binary_str.length() - 1); i >= 0; i--)
 	{
 		BIT current_bit = binary_str[i];
 		if (current_bit == '1')
@@ -101,12 +101,12 @@ std::string binary_to_base64(std::string& binary_str)
 	std::string padding_str;
 	switch (binary_str.length() % 24)
 	{
-		case 8:
-			padding_str.append(2, base64_padding_char);
-			break;
-		case 16:
-			padding_str.append(1, base64_padding_char);
-			break;
+	case 8:
+		padding_str.append(2, base64_padding_char);
+		break;
+	case 16:
+		padding_str.append(1, base64_padding_char);
+		break;
 	}
 	base64_str += padding_str;
 	return base64_str;
@@ -118,7 +118,7 @@ std::string base_string_conversions::hex_to_base64(std::string& hex_str)
 	return binary_to_base64(binary_str);
 }
 
-std::string base_string_conversions::base64_to_binary(std::string& base64_str) 
+std::string base_string_conversions::base64_to_binary(std::string& base64_str)
 {
 	std::string binary_str;
 	for (size_t i = 0; i < base64_str.length(); i++)
@@ -136,7 +136,7 @@ std::string base_string_conversions::base64_to_binary(std::string& base64_str)
 	return binary_str.substr(0, binary_str.length() - (binary_str.length() % 8));
 }
 
-std::string base_string_conversions::base64_to_hex(std::string& base64_str) 
+std::string base_string_conversions::base64_to_hex(std::string& base64_str)
 {
 	std::string binary_str = base_string_conversions::base64_to_binary(base64_str);
 	return base_string_conversions::binary_to_hex(binary_str);
@@ -168,7 +168,7 @@ std::string base_string_conversions::binary_to_hex(std::string& binary_str)
 	return hex_str;
 }
 
-std::string base_string_conversions::decimal_to_binary(int decimal, int binary_length) 
+std::string base_string_conversions::decimal_to_binary(int decimal, int binary_length)
 {
 	std::string binary_str;
 	for (int j = binary_length - 1; j >= 0; j--)
@@ -178,7 +178,7 @@ std::string base_string_conversions::decimal_to_binary(int decimal, int binary_l
 	return binary_str;
 }
 
-std::vector<BYTE> base_string_conversions::hex_to_bytes(std::string& hex_str) 
+std::vector<BYTE> base_string_conversions::hex_to_bytes(std::string& hex_str)
 {
 	std::vector<BYTE> bytes;
 	std::string binary_str = base_string_conversions::hex_to_binary(hex_str);

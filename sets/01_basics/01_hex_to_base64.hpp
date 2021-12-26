@@ -7,7 +7,7 @@ namespace s01
 {
 	namespace c01
 	{
-		/* 
+		/*
 			1) Convert hex to binary
 			2) Chunk the binary stream into groups of 6-bits
 			3) Convert each group of 6-bit into an ASCII character using the Base64 encoding table

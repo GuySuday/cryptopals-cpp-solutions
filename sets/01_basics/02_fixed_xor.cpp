@@ -5,7 +5,8 @@
 #include "../../utils/base_string_conversions.hpp"
 #include "../../utils/xor_utils.hpp"
 
-std::string s01::c02::fixed_xor(std::string& hex_str1, std::string& hex_str2) {
+std::string s01::c02::fixed_xor(std::string& hex_str1, std::string& hex_str2)
+{
     if (hex_str1.length() != hex_str2.length())
     {
         throw std::invalid_argument("strings should have the same size");

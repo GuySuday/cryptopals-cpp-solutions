@@ -38,7 +38,7 @@ std::vector<unsigned int> find_best_keysizes(std::vector<BYTE>& ciphertext_bytes
         // double avg_key_score = calculate_adjacent_blocks_avg_hamming(ciphertext, possible_keysize, ADJACENT_PAIRS_NUM);
         double avg_key_score = calculate_adjacent_blocks_avg_hamming(ciphertext_bytes, possible_keysize, ADJACENT_PAIRS_NUM);
         double norm_key_score = avg_key_score / possible_keysize;
-        m.insert({possible_keysize, norm_key_score});
+        m.insert({ possible_keysize, norm_key_score });
     }
     return collection_utils::find_smallest_n(m, n);
 }
@@ -46,7 +46,7 @@ std::vector<unsigned int> find_best_keysizes(std::vector<BYTE>& ciphertext_bytes
 std::vector<std::vector<BYTE>> split_into_blocks(std::vector<BYTE>& ciphertext, unsigned int block_size)
 {
     std::vector<std::vector<BYTE>> blocks;
-    for (size_t i = 0; i < ciphertext.size(); i+=block_size)
+    for (size_t i = 0; i < ciphertext.size(); i += block_size)
     {
         std::vector<BYTE> block = vector_utils::subvector<BYTE>(ciphertext, i, block_size);
         blocks.push_back(block);
@@ -54,14 +54,14 @@ std::vector<std::vector<BYTE>> split_into_blocks(std::vector<BYTE>& ciphertext, 
     return blocks;
 }
 
-s01::c06::Result s01::c06::break_repeating_key_xor(std::string &ciphertext_base64)
+s01::c06::Result s01::c06::break_repeating_key_xor(std::string& ciphertext_base64)
 {
     std::string ciphertext_hex = base_string_conversions::base64_to_hex(ciphertext_base64);
     std::vector<BYTE> ciphertext_bytes = base_string_conversions::hex_to_bytes(ciphertext_hex);
     std::vector<unsigned int> best_keysizes = find_best_keysizes(ciphertext_bytes, BEST_KEYSIZES_NUM);
     std::vector<BYTE> key;
 
-    for (unsigned int possible_keysize: best_keysizes)
+    for (unsigned int possible_keysize : best_keysizes)
     {
         std::vector<std::vector<BYTE>> blocks = split_into_blocks(ciphertext_bytes, possible_keysize);
         std::vector<std::vector<BYTE>> transposed_blocks = vector_utils::transpose(blocks);
@@ -74,7 +74,7 @@ s01::c06::Result s01::c06::break_repeating_key_xor(std::string &ciphertext_base6
                 BYTE key_byte = s01::c03::single_byte_xor_cipher(same_byte_xor_cipher).key;
                 key.push_back(key_byte);
             }
-            catch(const std::runtime_error&)
+            catch (const std::runtime_error&)
             {
                 // We may skip the current key if it can't decrypt the cipher
                 break;

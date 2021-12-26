@@ -20,7 +20,7 @@ s01::c04::Result s01::c04::detect_single_char_xor(std::string& file_path)
         {
             plaintext_str = s01::c03::single_byte_xor_cipher(bytes).plaintext;
         }
-        catch(const std::runtime_error&)
+        catch (const std::runtime_error&)
         {
             // We may skip hex strings that aren't decrypted using a single byte xor
             continue;
