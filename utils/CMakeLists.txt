@@ -23,4 +23,8 @@ set(
     file_utils.cpp
 )
 
+# TODO: condiser seperating the crypto_utils from the rest of the utils and link openssl only to it
 add_library(${This} UTILS ${Headers_utils} ${Sources_utils})
+find_package(OpenSSL REQUIRED)
+
+target_link_libraries(UTILS OpenSSL::SSL)

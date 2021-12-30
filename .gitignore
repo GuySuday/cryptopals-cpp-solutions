@@ -33,6 +33,8 @@
 
 # cmake
 build/
+_deps/
+CMakeFiles/
 
 # IDEs
 .vscode/

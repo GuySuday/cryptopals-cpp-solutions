@@ -12,3 +12,10 @@ I decided to implement them in C++.
 ## Challenges I solved
 
 * Set1 - 6/8 challenges
+
+## Setup
+### Linux
+* Install opessl:
+    ```bash
+    sudo apt install libssl-dev
+    ```
