@@ -9,6 +9,7 @@ set(
   04_detect_single_char_xor.hpp
   05_repeating_key_xor.hpp
   06_break_repeating_key_xor.hpp
+  07_aes_in_ecb_mode.hpp
 )
 set(
   sources_sets
@@ -18,6 +19,7 @@ set(
   04_detect_single_char_xor.cpp
   05_repeating_key_xor.cpp
   06_break_repeating_key_xor.cpp
+  07_aes_in_ecb_mode.cpp
 )
 
 add_library(SET1 STATIC ${headers_sets} ${sources_sets})

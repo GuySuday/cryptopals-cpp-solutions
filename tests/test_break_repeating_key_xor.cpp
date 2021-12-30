@@ -13,7 +13,7 @@ TEST(BreakRepeatingKeyXor, cryptopals_example)
     std::vector<BYTE> expected_key(expected_key_str.begin(), expected_key_str.end());
     std::string ciphertext_base64 = file_utils::read_file_without_newlines(enctyped_text_file_path);
     s01::c06::Result result = s01::c06::break_repeating_key_xor(ciphertext_base64);
-    
+
     EXPECT_EQ(result.plaintext, expected_plaintext_hex);
     EXPECT_EQ(result.key, expected_key);
 }

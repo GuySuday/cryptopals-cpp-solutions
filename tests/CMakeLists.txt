@@ -10,6 +10,7 @@ set(
   test_detect_single_char_xor.cpp
   test_repeating_key_xor.cpp
   test_break_repeating_key_xor.cpp
+  test_decrypt_aes_ecb.cpp
 )
 
 
