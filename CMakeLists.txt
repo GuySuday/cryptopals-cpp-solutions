@@ -3,6 +3,9 @@ project(cryptopals-cpp-solutions VERSION 0.1.0)
 
 set(CMAKE_CXX_STANDARD 11)
 
+# Including directories for absolute "#inclue"s 
+include_directories(.)
+
 include(CTest)
 include(CPack)
 

@@ -4,10 +4,10 @@
 #include "03_single_byte_xor_cipher.hpp"
 #include "05_repeating_key_xor.hpp"
 #include "06_break_repeating_key_xor.hpp"
-#include "../../utils/base_string_conversions.hpp"
-#include "../../utils/crypto_utils.hpp"
-#include "../../utils/vector_utils.hpp"
-#include "../../utils/collection_utils.hpp"
+#include "utils/base_string_conversions.hpp"
+#include "utils/crypto_utils.hpp"
+#include "utils/vector_utils.hpp"
+#include "utils/collection_utils.hpp"
 
 const unsigned int KEYSIZE_MIN_VAL = 2;
 const unsigned int KEYSIZE_MAX_VAL = 40;

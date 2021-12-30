@@ -2,8 +2,8 @@
 
 #include "03_single_byte_xor_cipher.hpp"
 #include "04_detect_single_char_xor.hpp"
-#include "../../utils/base_string_conversions.hpp"
-#include "../../utils/plaintext_score_utils.hpp"
+#include "utils/base_string_conversions.hpp"
+#include "utils/plaintext_score_utils.hpp"
 
 s01::c04::Result s01::c04::detect_single_char_xor(std::string& file_path)
 {

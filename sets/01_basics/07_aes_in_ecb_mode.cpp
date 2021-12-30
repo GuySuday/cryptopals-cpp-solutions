@@ -1,7 +1,7 @@
 #include "07_aes_in_ecb_mode.hpp"
 
-#include "../../utils/crypto_utils.hpp"
-#include "../../utils/base_string_conversions.hpp"
+#include "utils/crypto_utils.hpp"
+#include "utils/base_string_conversions.hpp"
 
 std::string s01::c07::decrypt_aes_128_ecb(std::vector<BYTE> encoded_ciphertext, std::vector<BYTE> key)
 {

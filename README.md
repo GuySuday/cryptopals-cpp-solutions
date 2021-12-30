@@ -9,12 +9,15 @@ I decided to implement them in C++.
 * `utils/`: The various utils I used in order to solve the challenges
 * `tests/`: The challenges' tests and utils't tests
 
-## Challenges I solved
+## Challenges progress
 
-* Set1 - 6/8 challenges
+|     Set     | Solved | Total |
+| :---------: | :----: | :---: |
+| (#1) Basics |   6    |   8   |
 
 ## Setup
 ### Linux
+
 * Install opessl:
     ```bash
     sudo apt install libssl-dev

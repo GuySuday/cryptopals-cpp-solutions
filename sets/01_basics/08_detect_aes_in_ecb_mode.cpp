@@ -1,8 +1,8 @@
 #include <fstream> // std::ifstream
 
 #include "08_detect_aes_in_ecb_mode.hpp"
-#include "../../utils/crypto_utils.hpp"
-#include "../../utils/base_string_conversions.hpp"
+#include "utils/crypto_utils.hpp"
+#include "utils/base_string_conversions.hpp"
 
 std::string s01::c08::detect_aes_in_ecb_mode(std::string& file_path)
 {

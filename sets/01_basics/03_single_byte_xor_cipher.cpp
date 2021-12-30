@@ -3,9 +3,9 @@
 #include <stdexcept> // std::runtime_error
 
 #include "03_single_byte_xor_cipher.hpp"
-#include "../../utils/xor_utils.hpp"
-#include "../../utils/base_string_conversions.hpp"
-#include "../../utils/plaintext_score_utils.hpp"
+#include "utils/xor_utils.hpp"
+#include "utils/base_string_conversions.hpp"
+#include "utils/plaintext_score_utils.hpp"
 
 s01::c03::Result s01::c03::single_byte_xor_cipher(std::vector<BYTE>& bytes)
 {

@@ -2,8 +2,8 @@
 #include <stdexcept>
 
 #include "02_fixed_xor.hpp"
-#include "../../utils/base_string_conversions.hpp"
-#include "../../utils/xor_utils.hpp"
+#include "utils/base_string_conversions.hpp"
+#include "utils/xor_utils.hpp"
 
 std::string s01::c02::fixed_xor(std::string& hex_str1, std::string& hex_str2)
 {

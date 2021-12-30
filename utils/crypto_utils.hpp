@@ -3,7 +3,7 @@
 
 #include <vector> // std::vector
 
-#include "../utils/types.hpp" // BIT, BYTE
+#include "utils/types.hpp" // BIT, BYTE
 
 namespace crypto_utils
 {

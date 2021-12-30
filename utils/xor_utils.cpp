@@ -1,11 +1,11 @@
 #include "xor_utils.hpp"
-#include "../utils/base_string_conversions.hpp"
+#include "utils/base_string_conversions.hpp"
 
 
 BIT xor_utils::xor_char_bits(BIT bit1, BIT bit2)
 {
     return ((bit1 - '0') ^ (bit2 - '0')) + '0';
-}    
+}
 
 std::vector<BYTE> xor_utils::xor_bytes_with_key(std::vector<BYTE>& bytes, BYTE ch)
 {
