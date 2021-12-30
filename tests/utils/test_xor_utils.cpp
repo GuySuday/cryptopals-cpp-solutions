@@ -1,10 +1,11 @@
 #include <gtest/gtest.h>
 
-#include "../utils/xor_utils.hpp"
-#include "../utils/types.hpp" // BIT
+#include "utils/xor_utils.hpp"
+#include "utils/types.hpp" // BIT
 
-class XorCharBitsTestFixture: public ::testing::TestWithParam<std::tuple<BIT, BIT, BIT>> { };
-TEST_P(XorCharBitsTestFixture, xor_char_bits_) {
+class XorCharBitsTestFixture : public ::testing::TestWithParam<std::tuple<BIT, BIT, BIT>> {};
+TEST_P(XorCharBitsTestFixture, xor_char_bits_)
+{
     BIT bit1 = std::get<0>(GetParam());
     BIT bit2 = std::get<1>(GetParam());
     BIT excepted_xor_bit = std::get<2>(GetParam());

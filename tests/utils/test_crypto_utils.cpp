@@ -2,9 +2,9 @@
 
 #include <vector> // std::vector
 
-#include "../utils/crypto_utils.hpp"
-#include "../utils/base_string_conversions.hpp"
-#include "../utils/types.hpp" // BIT, BYTE
+#include "utils/crypto_utils.hpp"
+#include "utils/base_string_conversions.hpp"
+#include "utils/types.hpp" // BIT, BYTE
 
 class HammingDistanceTestFixture : public ::testing::TestWithParam<std::tuple<std::string, std::string, unsigned int>> {};
 TEST_P(HammingDistanceTestFixture, hamming_distance_)

@@ -1,8 +1,8 @@
 #include <gtest/gtest.h>
 #include <string> // std::string
 
-#include "../sets/01_basics/06_break_repeating_key_xor.hpp"
-#include "../utils/file_utils.hpp"
+#include "sets/01_basics/06_break_repeating_key_xor.hpp"
+#include "utils/file_utils.hpp"
 
 TEST(BreakRepeatingKeyXor, cryptopals_example)
 {

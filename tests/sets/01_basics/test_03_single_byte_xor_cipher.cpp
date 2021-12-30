@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
-#include "../sets/01_basics/03_single_byte_xor_cipher.hpp"
-#include "../utils/base_string_conversions.hpp"
+#include "sets/01_basics/03_single_byte_xor_cipher.hpp"
+#include "utils/base_string_conversions.hpp"
 
 TEST(SingleByteXorCipher, cryptopals_example)
 {

@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "../sets/01_basics/08_detect_aes_in_ecb_mode.hpp"
+#include "sets/01_basics/08_detect_aes_in_ecb_mode.hpp"
 
 TEST(DetectAesInEcbMode, cryptopals_example)
 {

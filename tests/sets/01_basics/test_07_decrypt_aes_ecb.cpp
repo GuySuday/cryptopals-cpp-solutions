@@ -1,11 +1,11 @@
 #include <gtest/gtest.h>
 #include <string> // std::string
 
-#include "../sets/01_basics/07_aes_in_ecb_mode.hpp"
-#include "../utils/base_string_conversions.hpp"
-#include "../utils/file_utils.hpp"
-#include "../utils/crypto_utils.hpp"
-#include "../utils/types.hpp" // BYTE
+#include "sets/01_basics/07_aes_in_ecb_mode.hpp"
+#include "utils/base_string_conversions.hpp"
+#include "utils/file_utils.hpp"
+#include "utils/crypto_utils.hpp"
+#include "utils/types.hpp" // BYTE
 
 TEST(DecryptAesEcb, cryptopals_example)
 {

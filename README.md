@@ -13,7 +13,7 @@ I decided to implement them in C++.
 
 |     Set     | Solved | Total |
 | :---------: | :----: | :---: |
-| (#1) Basics |   6    |   8   |
+| (#1) Basics |   8    |   8   |
 
 ## Setup
 ### Linux

@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "../utils/base_string_conversions.hpp"
+#include "utils/base_string_conversions.hpp"
 
 class BinaryToDecimalTestFixture : public ::testing::TestWithParam<std::tuple<std::string, int>> {};
 class BinaryToHexTestFixture : public ::testing::TestWithParam<std::tuple<std::string, std::string>> {};

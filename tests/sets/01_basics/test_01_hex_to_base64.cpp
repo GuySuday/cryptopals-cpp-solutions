@@ -1,14 +1,14 @@
 #include <gtest/gtest.h>
 
-#include "../sets/01_basics/01_hex_to_base64.hpp"
+#include "sets/01_basics/01_hex_to_base64.hpp"
 
-class HexToBase64TestFixture : public ::testing::TestWithParam<std::tuple<std::string, std::string>> { };
+class HexToBase64TestFixture : public ::testing::TestWithParam<std::tuple<std::string, std::string>> {};
 
 TEST_P(HexToBase64TestFixture, hex_to_base64)
 {
     std::string hex_str = std::get<0>(GetParam());
     std::string expected_base64_str = std::get<1>(GetParam());
-    
+
     std::string base64_str = s01::c01::hex_to_base64(hex_str);
     EXPECT_EQ(base64_str, expected_base64_str);
 }

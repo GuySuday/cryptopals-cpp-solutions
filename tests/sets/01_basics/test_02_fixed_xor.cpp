@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "../sets/01_basics/02_fixed_xor.hpp"
+#include "sets/01_basics/02_fixed_xor.hpp"
 
 TEST(FixedXorTest, cryptopals_example)
 {
