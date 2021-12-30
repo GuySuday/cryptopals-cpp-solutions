@@ -11,6 +11,7 @@ set(
   test_repeating_key_xor.cpp
   test_break_repeating_key_xor.cpp
   test_decrypt_aes_ecb.cpp
+  test_detect_aes_in_ecb_mode.cpp
 )
 
 

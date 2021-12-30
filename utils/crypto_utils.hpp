@@ -7,6 +7,7 @@
 
 namespace crypto_utils
 {
+    const int AES_BLOCK_BITS_LEN = 128;
     /**
      * Calculates the hamming distance (the number of different bits)
      * between the two given bits streams
