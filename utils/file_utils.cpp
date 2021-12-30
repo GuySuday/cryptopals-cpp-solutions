@@ -2,7 +2,7 @@
 
 #include <fstream> // std:ifstream
 
-std::string file_utils::read_file_without_newlines(std::string& file_path) 
+std::string file_utils::read_file_without_newlines(std::string& file_path)
 {
     std::ifstream file(file_path);
     std::string buffer;

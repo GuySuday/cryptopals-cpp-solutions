@@ -182,6 +182,7 @@ std::vector<BYTE> base_string_conversions::hex_to_bytes(std::string& hex_str)
 {
 	std::vector<BYTE> bytes;
 	std::string binary_str = base_string_conversions::hex_to_binary(hex_str);
+
 	for (size_t i = 0; i < binary_str.length(); i += BYTE_NUM_OF_BITS)
 	{
 		std::string byte_str = binary_str.substr(i, BYTE_NUM_OF_BITS);
@@ -189,4 +190,16 @@ std::vector<BYTE> base_string_conversions::hex_to_bytes(std::string& hex_str)
 		bytes.push_back(byte);
 	}
 	return bytes;
+}
+
+std::string base_string_conversions::bytes_to_hex(std::vector<BYTE>& bytes)
+{
+	std::string binary_str;
+
+	for (BYTE byte : bytes)
+	{
+		binary_str += base_string_conversions::decimal_to_binary(byte, BYTE_NUM_OF_BITS);
+	}
+
+	return base_string_conversions::binary_to_hex(binary_str);
 }
