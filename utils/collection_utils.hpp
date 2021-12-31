@@ -4,6 +4,7 @@
 #include <map> // std::map
 #include <vector> // std::vector
 #include <algorithm> // std::min, std::partial_sort_copy
+#include <utility> // std::pair
 
 namespace collection_utils
 {

@@ -11,9 +11,10 @@ I decided to implement them in C++.
 
 ## Challenges progress
 
-|     Set     | Solved | Total |
-| :---------: | :----: | :---: |
-| (#1) Basics |   8    |   8   |
+| Set #            | Challenges # | Solved | Total |
+| :--------------- | :----------: | :----: | :---: |
+| (1) Basics       |     1-8      |   8    |   8   |
+| (2) Block Crypto |     9-16     |   1    |   8   |
 
 ## Setup
 ### Linux

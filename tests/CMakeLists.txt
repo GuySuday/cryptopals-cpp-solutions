@@ -11,6 +11,7 @@ add_executable(
 target_link_libraries(
   tests
   SET1
+  SET2
   UTILS
   gtest_main
 )

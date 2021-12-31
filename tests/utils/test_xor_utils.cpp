@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include <tuple>
+#include <tuple> // std::tuple
 
 #include "utils/xor_utils.hpp"
 #include "utils/types.hpp" // bit
