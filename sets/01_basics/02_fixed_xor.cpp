@@ -1,7 +1,9 @@
 #include <string>
-#include <stdexcept>
-
 #include "02_fixed_xor.hpp"
+
+#include <string> // std::string
+#include <stdexcept> // std::invalid_argument
+
 #include "utils/base_string_conversions.hpp"
 #include "utils/xor_utils.hpp"
 

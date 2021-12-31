@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 
 #include <vector> // std::vector
+#include <string> // std::string
+#include <tuple> // std::tuple
 
 #include "utils/crypto_utils.hpp"
 #include "utils/base_string_conversions.hpp"

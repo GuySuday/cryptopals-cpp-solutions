@@ -9,7 +9,7 @@ namespace collection_utils
 {
     /**
      * Find n keys with the smallest value
-     * 
+     *
      * @tparam K The key's type
      * @tparam V The value's type
      * @param m The key-value map
@@ -28,7 +28,7 @@ namespace collection_utils
             m.end(),
             smallest_n_pairs.begin(),
             smallest_n_pairs.end(),
-            [](const std::pair<K, V> &l, const std::pair<K, V> &r)
+            [](const std::pair<K, V>& l, const std::pair<K, V>& r)
             {
                 return l.second < r.second;
             }
@@ -36,9 +36,9 @@ namespace collection_utils
 
         // filling smallest_n with n sorted (by value) keys
         std::transform(
-            smallest_n_pairs.begin(), 
-            smallest_n_pairs.end(), 
-            std::back_inserter(smallest_n), 
+            smallest_n_pairs.begin(),
+            smallest_n_pairs.end(),
+            std::back_inserter(smallest_n),
             [](const std::pair<K, V>& p) { return p.first; }
         );
 

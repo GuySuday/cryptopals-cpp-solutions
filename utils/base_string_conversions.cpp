@@ -1,8 +1,11 @@
-#include <array> // std::array
+#include "base_string_conversions.hpp"
+
 #include <string> // std::string
+#include <vector> // std::vector
+#include <array> // std::array
 #include <algorithm> // std::find
 
-#include "base_string_conversions.hpp"
+#include "utils/types.hpp" // byte, nibble, uint
 
 static const int BASE64_TABLE_SIZE = 64;
 static const int SEXTET_SIZE = 6;

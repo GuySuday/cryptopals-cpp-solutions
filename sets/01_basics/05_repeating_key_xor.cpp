@@ -1,4 +1,9 @@
 #include "05_repeating_key_xor.hpp"
+
+#include <string> // std::string
+#include <vector> // std::vector
+
+#include "utils/types.hpp" // byte, uint
 #include "utils/base_string_conversions.hpp"
 
 std::string s01::c05::repeating_key_xor(std::string& plaintext, std::vector<byte>& key)

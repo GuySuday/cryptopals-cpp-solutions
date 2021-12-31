@@ -2,6 +2,7 @@
 #define SETS_01_BASICS_06_BREAK_REPEATING_KEY_XOR_HPP_INCLUDED
 
 #include <string> // std::string
+#include <vector> // std::vector
 
 #include "utils/types.hpp" // byte
 

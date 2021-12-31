@@ -1,5 +1,7 @@
 #include <gtest/gtest.h>
 
+#include <string> // std::string
+
 #include "sets/01_basics/04_detect_single_char_xor.hpp"
 
 TEST(DetectSingleCharXor, cryptopals_example)

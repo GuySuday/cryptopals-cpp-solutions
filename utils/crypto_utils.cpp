@@ -1,8 +1,13 @@
-#include <stdexcept> // std::invalid_argument
-#include <openssl/aes.h>
-#include <map>
-
 #include "crypto_utils.hpp"
+
+#include <openssl/aes.h>
+
+#include <vector> // std::vector
+#include <stdexcept> // std::invalid_argument, std::runtime_error
+#include <map> // std::map
+
+#include "utils/types.hpp" // bit, byte, uint
+
 
 uint crypto_utils::hamming_distance(std::vector<bit>& bits1, std::vector<bit>& bits2)
 {

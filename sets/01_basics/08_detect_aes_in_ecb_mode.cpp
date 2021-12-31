@@ -1,6 +1,9 @@
-#include <fstream> // std::ifstream
-
 #include "08_detect_aes_in_ecb_mode.hpp"
+
+#include <fstream> // std::ifstream
+#include <string> // std::string
+
+#include "utils/types.hpp" // byte
 #include "utils/crypto_utils.hpp"
 #include "utils/base_string_conversions.hpp"
 

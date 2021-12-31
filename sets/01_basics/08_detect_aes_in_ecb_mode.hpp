@@ -2,7 +2,6 @@
 #define SETS_01_BASICS_08_DETECT_AES_IN_ECB_MODE_HPP_INCLUDED
 
 #include <string> // std::string
-#include <vector> // std::vector
 
 #include "utils/types.hpp" // byte
 

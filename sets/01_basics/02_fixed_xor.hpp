@@ -1,7 +1,7 @@
 #ifndef SETS_01_BASICS_02_FIXED_XOR_HPP_INCLUDED
 #define SETS_01_BASICS_02_FIXED_XOR_HPP_INCLUDED
 
-#include <string>
+#include <string> // std::string
 
 namespace s01
 {

@@ -1,7 +1,12 @@
 #include <gtest/gtest.h>
 
+#include <string> // std::string
+#include <vector> // std::vector
+#include <stdexcept> // std::runtime_error
+
 #include "sets/01_basics/03_single_byte_xor_cipher.hpp"
 #include "utils/base_string_conversions.hpp"
+#include "utils/types.hpp" // byte
 
 TEST(SingleByteXorCipher, cryptopals_example)
 {

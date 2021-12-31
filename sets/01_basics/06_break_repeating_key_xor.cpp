@@ -1,9 +1,12 @@
+#include "06_break_repeating_key_xor.hpp"
+
 #include <vector> // std::vector
 #include <map> // std::map
+#include <string> // std::string
 
 #include "03_single_byte_xor_cipher.hpp"
 #include "05_repeating_key_xor.hpp"
-#include "06_break_repeating_key_xor.hpp"
+#include "utils/types.hpp" // byte, uint, uint
 #include "utils/base_string_conversions.hpp"
 #include "utils/crypto_utils.hpp"
 #include "utils/vector_utils.hpp"

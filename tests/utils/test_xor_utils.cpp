@@ -1,5 +1,7 @@
 #include <gtest/gtest.h>
 
+#include <tuple>
+
 #include "utils/xor_utils.hpp"
 #include "utils/types.hpp" // bit
 

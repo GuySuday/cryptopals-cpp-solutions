@@ -1,6 +1,10 @@
 #include <gtest/gtest.h>
 
+#include <string> // std::string
+#include <vector> // std::vector
+
 #include "sets/01_basics/05_repeating_key_xor.hpp"
+#include "utils/types.hpp" // byte
 
 TEST(RepeatingKeyXor, cryptopals_example)
 {

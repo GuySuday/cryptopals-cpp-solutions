@@ -3,7 +3,7 @@
 
 #include <vector> // std::vector
 
-#include "types.hpp" // byte
+#include "utils/types.hpp" // byte
 
 namespace plaintext_score_utils
 {

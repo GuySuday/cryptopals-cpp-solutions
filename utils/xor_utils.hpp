@@ -1,10 +1,9 @@
 #ifndef UTILS_XOR_UTILS_HPP_INCLUDED
 #define UTILS_XOR_UTILS_HPP_INCLUDED
 
-#include <string>
-#include <vector>
+#include <vector> // std::vector
 
-#include "types.hpp" // bit
+#include "utils/types.hpp" // bit, byte
 
 namespace xor_utils
 {

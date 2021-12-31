@@ -3,6 +3,7 @@
 
 #include <vector> // std::vector
 #include <stdexcept> // std::invalid_argument
+#include <algorithm> // std::min
 
 namespace vector_utils
 {
@@ -10,7 +11,7 @@ namespace vector_utils
      * Returns a sub-vector of `vector`, starting from position `start` including `num` elements.
      * If there are not enough elements in the vector (i.e: `start`+`num` > vector.size()),
      * return as many elements as possible.
-     * 
+     *
      * @tparam T The vector's element's type
      * @param vector The original vector
      * @param start The starting location of the sub-vector
@@ -18,7 +19,8 @@ namespace vector_utils
      * @return A sub-vector of `vector`, starting from position `start` including `num` elements.
      */
     template<typename T>
-    std::vector<T> subvector(std::vector<T> vector, size_t start, size_t num){
+    std::vector<T> subvector(std::vector<T> vector, size_t start, size_t num)
+    {
         auto end = std::min(vector.size(), start + num);
         std::vector<T> sub_vector(vector.begin() + start, vector.begin() + end);
         return sub_vector;
@@ -26,7 +28,7 @@ namespace vector_utils
 
     /**
      * Returning a transposed version of `matrix`.
-     * 
+     *
      * @tparam T The matrix's element's type
      * @param matrix The marix to transpose
      * @return A transposed matrix

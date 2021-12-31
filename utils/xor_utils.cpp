@@ -1,6 +1,8 @@
 #include "xor_utils.hpp"
-#include "utils/base_string_conversions.hpp"
 
+#include <vector> // std::vector
+
+#include "utils/types.hpp" // bit, byte
 
 bit xor_utils::xor_char_bits(bit bit1, bit bit2)
 {

@@ -1,5 +1,9 @@
 #include "07_aes_in_ecb_mode.hpp"
 
+#include <string> // std::string
+#include <vector> // std::vector
+
+#include "utils/types.hpp" // byte
 #include "utils/crypto_utils.hpp"
 #include "utils/base_string_conversions.hpp"
 

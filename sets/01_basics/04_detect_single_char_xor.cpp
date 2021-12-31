@@ -1,7 +1,11 @@
+#include "04_detect_single_char_xor.hpp"
+
+#include <string> // std::string
+#include <vector> // std::vector
 #include <fstream> // std::ifstream
 
 #include "03_single_byte_xor_cipher.hpp"
-#include "04_detect_single_char_xor.hpp"
+#include "utils/types.hpp" // byte
 #include "utils/base_string_conversions.hpp"
 #include "utils/plaintext_score_utils.hpp"
 

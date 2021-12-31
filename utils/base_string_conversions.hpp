@@ -3,7 +3,8 @@
 
 #include <string> // std::string
 #include <vector> // std::vector
-#include "types.hpp" // byte, nibble, uint
+
+#include "types.hpp" // byte, uint
 
 namespace base_string_conversions
 {

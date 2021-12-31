@@ -1,6 +1,12 @@
 #include "plaintext_score_utils.hpp"
 
+#include <vector> // std::vector
 #include <map> // std::map
+#include <stdexcept> // std::runtime_error
+#include <cctype> // tolower()
+
+#include "utils/types.hpp" // byte
+
 
 const std::map<byte, double> english_letters_freq{
     {'a', 8.49}, {'b', 2.07}, {'c', 4.53}, {'d', 3.38}, {'e', 11.16}, {'f', 1.81}, {'g', 2.47},

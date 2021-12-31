@@ -1,8 +1,10 @@
-#include <iostream>
-#include <cctype> // tolower
-#include <stdexcept> // std::runtime_error
-
 #include "03_single_byte_xor_cipher.hpp"
+
+#include <stdexcept> // std::runtime_error
+#include <string> // std::string
+#include <vector> // std::vector
+
+#include "utils/types.hpp" // byte
 #include "utils/xor_utils.hpp"
 #include "utils/base_string_conversions.hpp"
 #include "utils/plaintext_score_utils.hpp"

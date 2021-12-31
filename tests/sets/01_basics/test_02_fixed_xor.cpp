@@ -1,5 +1,7 @@
 #include <gtest/gtest.h>
 
+#include <string> // std::string
+
 #include "sets/01_basics/02_fixed_xor.hpp"
 
 TEST(FixedXorTest, cryptopals_example)
