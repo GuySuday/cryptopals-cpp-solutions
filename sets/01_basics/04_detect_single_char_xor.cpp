@@ -6,7 +6,7 @@
 
 #include "03_single_byte_xor_cipher.hpp"
 #include "utils/types.hpp" // byte
-#include "utils/base_string_conversions.hpp"
+#include "utils/base_conversions.hpp"
 #include "utils/plaintext_score_utils.hpp"
 
 s01::c04::Result s01::c04::detect_single_char_xor(std::string& file_path)
@@ -18,7 +18,7 @@ s01::c04::Result s01::c04::detect_single_char_xor(std::string& file_path)
 
     while (std::getline(file, hex_str))
     {
-        std::vector<byte> bytes = base_string_conversions::hex_to_bytes(hex_str);
+        std::vector<byte> bytes = base_conversions::hex_to_bytes(hex_str);
         std::string plaintext_str;
         try
         {

@@ -18,7 +18,7 @@ TEST_P(HexToBase64TestFixture, hex_to_base64)
 
 // TODO: find a way to add a suffix name to the test according to its name
 INSTANTIATE_TEST_SUITE_P(
-    BaseStringConversions,
+    BaseConversions,
     HexToBase64TestFixture,
     ::testing::Values(
         std::make_tuple(

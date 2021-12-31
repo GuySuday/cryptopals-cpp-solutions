@@ -1,7 +1,7 @@
 # Store all the test files under a variable
 set(
   TEST_FILES
-  test_base_string_conversions.cpp
+  test_base_conversions.cpp
   test_crypto_utils.cpp
   test_xor_utils.cpp
 )

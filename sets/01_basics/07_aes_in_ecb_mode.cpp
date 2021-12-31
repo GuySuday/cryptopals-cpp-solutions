@@ -5,13 +5,13 @@
 
 #include "utils/types.hpp" // byte
 #include "utils/crypto_utils.hpp"
-#include "utils/base_string_conversions.hpp"
+#include "utils/base_conversions.hpp"
 
 std::string s01::c07::decrypt_aes_128_ecb(std::vector<byte> encoded_ciphertext, std::vector<byte> key)
 {
     std::string encoded_ciphertext_str(encoded_ciphertext.begin(), encoded_ciphertext.end());  // TODO: solve the endless convertions...
-    std::string ciphertext_hex = base_string_conversions::base64_to_hex(encoded_ciphertext_str);
-    std::vector<byte> ciphertext_bytes = base_string_conversions::hex_to_bytes(ciphertext_hex);
+    std::string ciphertext_hex = base_conversions::base64_to_hex(encoded_ciphertext_str);
+    std::vector<byte> ciphertext_bytes = base_conversions::hex_to_bytes(ciphertext_hex);
     std::vector<byte> plaintext_bytes = crypto_utils::aes_ecb_decrypt(ciphertext_bytes, key, 128);
-    return base_string_conversions::bytes_to_hex(plaintext_bytes);
+    return base_conversions::bytes_to_hex(plaintext_bytes);
 }

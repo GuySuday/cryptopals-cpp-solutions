@@ -6,7 +6,7 @@
 
 #include "utils/types.hpp" // byte
 #include "utils/xor_utils.hpp"
-#include "utils/base_string_conversions.hpp"
+#include "utils/base_conversions.hpp"
 #include "utils/plaintext_score_utils.hpp"
 
 s01::c03::Result s01::c03::single_byte_xor_cipher(std::vector<byte>& bytes)

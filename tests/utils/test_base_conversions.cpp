@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "utils/base_string_conversions.hpp"
+#include "utils/base_conversions.hpp"
 
 class BinaryToDecimalTestFixture : public ::testing::TestWithParam<std::tuple<std::string, int>> {};
 class BinaryToHexTestFixture : public ::testing::TestWithParam<std::tuple<std::string, std::string>> {};
@@ -8,11 +8,11 @@ class HexToBinaryTestFixture : public ::testing::TestWithParam<std::tuple<std::s
 class Base64ToHexTestFixture : public ::testing::TestWithParam<std::tuple<std::string, std::string>> {};
 
 // TODO: is there a way to combine the fixture tests (TEST_P) and the regular tests (TEST) under the same name?
-TEST(BaseStringConversions, hex_to_binary_invalid_hex)
+TEST(BaseConversions, hex_to_binary_invalid_hex)
 {
     std::string invalid_hex_str = "not hex";
     EXPECT_THROW(
-        base_string_conversions::hex_to_binary(invalid_hex_str),
+        base_conversions::hex_to_binary(invalid_hex_str),
         std::invalid_argument
     );
 }
@@ -20,22 +20,22 @@ TEST_P(HexToBinaryTestFixture, hex_to_binary)
 {
     std::string hex_str = std::get<0>(GetParam());
     std::string expected_binary_str = std::get<1>(GetParam());
-    std::string binary_str = base_string_conversions::hex_to_binary(hex_str);
+    std::string binary_str = base_conversions::hex_to_binary(hex_str);
     EXPECT_EQ(binary_str, expected_binary_str);
 }
 TEST_P(BinaryToDecimalTestFixture, binary_to_decimal)
 {
     std::string binary_str = std::get<0>(GetParam());
     int expected_decimal = std::get<1>(GetParam());;
-    int decimal = base_string_conversions::binary_to_decimal(binary_str);
+    int decimal = base_conversions::binary_to_decimal(binary_str);
     EXPECT_EQ(decimal, expected_decimal);
 }
 
-TEST(BaseStringConversions, binary_to_hex_wrong_length)
+TEST(BaseConversions, binary_to_hex_wrong_length)
 {
     std::string binary_str = "010";
     EXPECT_THROW(
-        base_string_conversions::binary_to_hex(binary_str),
+        base_conversions::binary_to_hex(binary_str),
         std::invalid_argument
     );
 }
@@ -44,7 +44,7 @@ TEST_P(BinaryToHexTestFixture, binary_to_hex)
 {
     std::string binary_str = std::get<0>(GetParam());
     std::string expected_hex_str = std::get<1>(GetParam());
-    std::string hex_str = base_string_conversions::binary_to_hex(binary_str);
+    std::string hex_str = base_conversions::binary_to_hex(binary_str);
     EXPECT_EQ(hex_str, expected_hex_str);
 }
 
@@ -52,12 +52,12 @@ TEST_P(Base64ToHexTestFixture, base64_to_hex)
 {
     std::string base64_str = std::get<0>(GetParam());
     std::string expected_hex_str = std::get<1>(GetParam());
-    std::string hex_str = base_string_conversions::base64_to_hex(base64_str);
+    std::string hex_str = base_conversions::base64_to_hex(base64_str);
     EXPECT_EQ(hex_str, expected_hex_str);
 }
 
 INSTANTIATE_TEST_SUITE_P(
-    BaseStringConversions,
+    BaseConversions,
     Base64ToHexTestFixture,
     ::testing::Values(
         std::make_tuple(

@@ -4,7 +4,7 @@
 #include <vector> // std::vector
 
 #include "sets/01_basics/07_aes_in_ecb_mode.hpp"
-#include "utils/base_string_conversions.hpp"
+#include "utils/base_conversions.hpp"
 #include "utils/file_utils.hpp"
 #include "utils/crypto_utils.hpp"
 #include "utils/types.hpp" // byte
@@ -22,10 +22,10 @@ TEST(DecryptAesEcb, cryptopals_example)
 
     EXPECT_EQ(plaintext_hex, expected_plaintext_hex);
 
-    std::vector<byte> plaintext_data = base_string_conversions::hex_to_bytes(plaintext_hex);
+    std::vector<byte> plaintext_data = base_conversions::hex_to_bytes(plaintext_hex);
     std::vector<byte> decryped_data = crypto_utils::aes_ecb_encrypt(plaintext_data, key, 128);
-    std::string decryped_data_hex = base_string_conversions::bytes_to_hex(decryped_data);
-    std::string encoded_decrypted_str = base_string_conversions::hex_to_base64(decryped_data_hex);
+    std::string decryped_data_hex = base_conversions::bytes_to_hex(decryped_data);
+    std::string encoded_decrypted_str = base_conversions::hex_to_base64(decryped_data_hex);
 
     EXPECT_EQ(encoded_decrypted_str, encoded_ciphertext_str);
 }

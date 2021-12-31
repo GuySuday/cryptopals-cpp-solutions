@@ -1,12 +1,12 @@
-#ifndef UTILS_BASE_STRING_CONVERSIONS_HPP_INCLUDED
-#define UTILS_BASE_STRING_CONVERSIONS_HPP_INCLUDED
+#ifndef UTILS_BASE_CONVERSIONS_HPP_INCLUDED
+#define UTILS_BASE_CONVERSIONS_HPP_INCLUDED
 
 #include <string> // std::string
 #include <vector> // std::vector
 
 #include "types.hpp" // byte, uint
 
-namespace base_string_conversions
+namespace base_conversions
 {
     const int NIBBLE_BITS_SIZE = 4;
     std::string hex_to_binary(std::string& hex_str);
@@ -20,4 +20,5 @@ namespace base_string_conversions
     std::string decimal_to_binary(uint decimal, uint binary_length); // TODO: does the `binary_length` param really necessary?
 };
 
-#endif /* UTILS_BASE_STRING_CONVERSIONS_HPP_INCLUDED */
+
+#endif /* UTILS_BASE_CONVERSIONS_HPP_INCLUDED */

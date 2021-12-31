@@ -7,7 +7,7 @@
 #include "03_single_byte_xor_cipher.hpp"
 #include "05_repeating_key_xor.hpp"
 #include "utils/types.hpp" // byte, uint, uint
-#include "utils/base_string_conversions.hpp"
+#include "utils/base_conversions.hpp"
 #include "utils/crypto_utils.hpp"
 #include "utils/vector_utils.hpp"
 #include "utils/collection_utils.hpp"
@@ -32,7 +32,7 @@ double calculate_adjacent_blocks_avg_hamming(std::vector<byte>& ciphertext_bytes
 
 std::vector<uint> find_best_keysizes(std::vector<byte>& ciphertext_bytes, uint n)
 {
-    double min_key_score = KEYSIZE_MAX_VAL * base_string_conversions::NIBBLE_BITS_SIZE;
+    double min_key_score = KEYSIZE_MAX_VAL * base_conversions::NIBBLE_BITS_SIZE;
     uint keysize = KEYSIZE_MIN_VAL;
     std::map<uint, double> m;
     for (uint possible_keysize = KEYSIZE_MIN_VAL; possible_keysize < KEYSIZE_MAX_VAL; possible_keysize++)
@@ -58,8 +58,8 @@ std::vector<std::vector<byte>> split_into_blocks(std::vector<byte>& ciphertext, 
 
 s01::c06::Result s01::c06::break_repeating_key_xor(std::string& ciphertext_base64)
 {
-    std::string ciphertext_hex = base_string_conversions::base64_to_hex(ciphertext_base64);
-    std::vector<byte> ciphertext_bytes = base_string_conversions::hex_to_bytes(ciphertext_hex);
+    std::string ciphertext_hex = base_conversions::base64_to_hex(ciphertext_base64);
+    std::vector<byte> ciphertext_bytes = base_conversions::hex_to_bytes(ciphertext_hex);
     std::vector<uint> best_keysizes = find_best_keysizes(ciphertext_bytes, BEST_KEYSIZES_NUM);
     std::vector<byte> key;
 
