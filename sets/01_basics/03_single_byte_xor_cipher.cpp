@@ -7,14 +7,14 @@
 #include "utils/base_string_conversions.hpp"
 #include "utils/plaintext_score_utils.hpp"
 
-s01::c03::Result s01::c03::single_byte_xor_cipher(std::vector<BYTE>& bytes)
+s01::c03::Result s01::c03::single_byte_xor_cipher(std::vector<byte>& bytes)
 {
     double max_score = 0; // TODO: double or float?
-    BYTE best_key = 0;
+    byte best_key = 0;
 
-    for (BYTE key = 0; key < POSSIBLE_BYTES_NUM - 1; key++)
+    for (byte key = 0; key < POSSIBLE_BYTES_NUM - 1; key++)
     {
-        std::vector<BYTE> possible_text = xor_utils::xor_bytes_with_key(bytes, key);
+        std::vector<byte> possible_text = xor_utils::xor_bytes_with_key(bytes, key);
         double current_score = plaintext_score_utils::score_text(possible_text);
         if (current_score > max_score)
         {
@@ -27,7 +27,7 @@ s01::c03::Result s01::c03::single_byte_xor_cipher(std::vector<BYTE>& bytes)
         throw std::runtime_error("couldn't find a key that decrypts the cipher");
     }
     // After finding the key, we can xor again with it to find the plaintext
-    std::vector<BYTE> plaintext = xor_utils::xor_bytes_with_key(bytes, best_key);
+    std::vector<byte> plaintext = xor_utils::xor_bytes_with_key(bytes, best_key);
     Result result = {
         std::string(plaintext.begin(), plaintext.end()),
         best_key

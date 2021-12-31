@@ -3,7 +3,7 @@
 
 #include <string> // std::string
 
-#include "utils/types.hpp" // BYTE
+#include "utils/types.hpp" // byte
 
 namespace s01
 {
@@ -12,7 +12,7 @@ namespace s01
         struct Result
         {
             std::string plaintext;
-            std::vector<BYTE> key;
+            std::vector<byte> key;
         };
         Result break_repeating_key_xor(std::string& ciphertext_base64);
     };

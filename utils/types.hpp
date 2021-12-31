@@ -2,8 +2,10 @@
 #define UTILS_TYPES_HPP_INCLUDED
 
 /* types */
-using BYTE = unsigned char; // TODO: is 'BYTE' the right name here?
-using BIT = unsigned char;
+using byte = unsigned char; // TODO: is 'byte' the right name here?
+using nibble = unsigned char;
+using bit = unsigned char;
+
 using uint = unsigned int; // Redefine in case the compiler already defines it
 
 /* types's metrics */

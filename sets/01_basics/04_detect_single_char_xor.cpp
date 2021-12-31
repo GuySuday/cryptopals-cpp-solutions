@@ -9,12 +9,12 @@ s01::c04::Result s01::c04::detect_single_char_xor(std::string& file_path)
 {
     std::ifstream file(file_path);
     std::string hex_str, best_hex_str;
-    std::vector<BYTE> best_plaintext;
+    std::vector<byte> best_plaintext;
     double max_score = 0;
 
     while (std::getline(file, hex_str))
     {
-        std::vector<BYTE> bytes = base_string_conversions::hex_to_bytes(hex_str);
+        std::vector<byte> bytes = base_string_conversions::hex_to_bytes(hex_str);
         std::string plaintext_str;
         try
         {
@@ -25,7 +25,7 @@ s01::c04::Result s01::c04::detect_single_char_xor(std::string& file_path)
             // We may skip hex strings that aren't decrypted using a single byte xor
             continue;
         }
-        std::vector<BYTE> plaintext(plaintext_str.begin(), plaintext_str.end()); // TODO: shouldn't we just change single_byte_xor_cipher to return a vector?
+        std::vector<byte> plaintext(plaintext_str.begin(), plaintext_str.end()); // TODO: shouldn't we just change single_byte_xor_cipher to return a vector?
         double current_score = plaintext_score_utils::score_text(plaintext);
         if (current_score > max_score)
         {

@@ -4,13 +4,13 @@
 #include <string> // std::string
 #include <vector> // std::vector
 
-#include "utils/types.hpp" // BYTE
+#include "utils/types.hpp" // byte
 
 namespace s01
 {
     namespace c07
     {
-        std::string decrypt_aes_128_ecb(std::vector<BYTE> encoded_ciphertext, std::vector<BYTE> key);
+        std::string decrypt_aes_128_ecb(std::vector<byte> encoded_ciphertext, std::vector<byte> key);
     };
 };
 

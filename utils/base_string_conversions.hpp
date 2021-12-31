@@ -3,14 +3,14 @@
 
 #include <string> // std::string
 #include <vector> // std::vector
-#include "types.hpp" // BYTE, uint
+#include "types.hpp" // byte, nibble, uint
 
 namespace base_string_conversions
 {
-    const int HEX_DIGIT_BITS_SIZE = 4;
+    const int NIBBLE_BITS_SIZE = 4;
     std::string hex_to_binary(std::string& hex_str);
-    std::vector<BYTE> hex_to_bytes(std::string& hex_str);
-    std::string bytes_to_hex(std::vector<BYTE>& bytes);
+    std::vector<byte> hex_to_bytes(std::string& hex_str);
+    std::string bytes_to_hex(std::vector<byte>& bytes);
     std::string hex_to_base64(std::string& hex_str);
     std::string base64_to_binary(std::string& base64_str);
     std::string base64_to_hex(std::string& base64_str);

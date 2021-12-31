@@ -3,7 +3,7 @@
 
 #include <vector> // std::vector
 
-#include "utils/types.hpp" // BIT, BYTE, uint
+#include "utils/types.hpp" // bit, byte, uint
 
 namespace crypto_utils
 {
@@ -16,7 +16,7 @@ namespace crypto_utils
      * @param bits2 The second bits stream
      * @return The hamming distance between `bits1` and `bits2`
      */
-    uint hamming_distance(std::vector<BIT>& bits1, std::vector<BIT>& bits2);
+    uint hamming_distance(std::vector<bit>& bits1, std::vector<bit>& bits2);
 
     /**
      * Decrypts `encrypted_data` with `key`. The key have to be `key_len` bits long.
@@ -26,7 +26,7 @@ namespace crypto_utils
      * @param key_len Key's number of bits
      * @return The decrypted data
      */
-    std::vector<BYTE> aes_ecb_decrypt(std::vector<BYTE>& encrypted_data, std::vector<BYTE>& key, uint key_len);
+    std::vector<byte> aes_ecb_decrypt(std::vector<byte>& encrypted_data, std::vector<byte>& key, uint key_len);
 
     /**
      * Encrypts `plaintext_data` with `key`. The key have to be `key_len` bits long.
@@ -36,6 +36,6 @@ namespace crypto_utils
      * @param key_len Key's number of bits
      * @return The encrypted data
      */
-    std::vector<BYTE> aes_ecb_encrypt(std::vector<BYTE>& plaintext_data, std::vector<BYTE>& key, uint key_len);
+    std::vector<byte> aes_ecb_encrypt(std::vector<byte>& plaintext_data, std::vector<byte>& key, uint key_len);
 };
 #endif /* UTILS_CRYPTO_UTILS_HPP_INCLUDED */

@@ -7,7 +7,7 @@
 static const int BASE64_TABLE_SIZE = 64;
 static const int SEXTET_SIZE = 6;
 static const int HEX_NUM_OF_DIGITS = 16;
-static const unsigned char base64_padding_char = '=';
+static const nibble base64_padding_char = '=';
 std::array<unsigned char, BASE64_TABLE_SIZE> base64_encoding_table =
 {
 	'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
@@ -20,30 +20,30 @@ std::array<unsigned char, BASE64_TABLE_SIZE> base64_encoding_table =
 };
 
 // TODO: don't really need this table, can use the ASCII table instead
-unsigned char decimal_to_hex_table[HEX_NUM_OF_DIGITS] =
+nibble decimal_to_hex_table[HEX_NUM_OF_DIGITS] =
 {
 	'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
 	'a', 'b', 'c', 'd', 'e', 'f'
 };
 
-uint hex_digit_to_decimal(unsigned char hex_digit)
+uint nibble_to_decimal(nibble nibble_val)
 {
 	uint decimal_value = 0;
-	if (hex_digit >= '0' & hex_digit <= '9')
+	if (nibble_val >= '0' & nibble_val <= '9')
 	{
-		decimal_value = hex_digit - '0';
+		decimal_value = nibble_val - '0';
 	}
-	else if (hex_digit >= 'a' & hex_digit <= 'f')
+	else if (nibble_val >= 'a' & nibble_val <= 'f')
 	{
-		decimal_value = (hex_digit - 'a') + 10;
+		decimal_value = (nibble_val - 'a') + 10;
 	}
-	else if (hex_digit >= 'A' & hex_digit <= 'F')
+	else if (nibble_val >= 'A' & nibble_val <= 'F')
 	{
-		decimal_value = (hex_digit - 'A') + 10;
+		decimal_value = (nibble_val - 'A') + 10;
 	}
 	else
 	{
-		throw std::invalid_argument(std::string("invalid hex char: ").append(1, hex_digit));
+		throw std::invalid_argument(std::string("invalid nibble value: ").append(1, nibble_val));
 	}
 	return decimal_value;
 }
@@ -53,10 +53,10 @@ std::string base_string_conversions::hex_to_binary(std::string& hex_str)
 {
 	std::string binary_str;
 	int hex_decimal_value = 0;
-	for (unsigned char hex_digit : hex_str)
+	for (nibble hex_digit : hex_str)
 	{
-		hex_decimal_value = hex_digit_to_decimal(hex_digit);
-		binary_str += base_string_conversions::decimal_to_binary(hex_decimal_value, HEX_DIGIT_BITS_SIZE);
+		hex_decimal_value = nibble_to_decimal(hex_digit);
+		binary_str += base_string_conversions::decimal_to_binary(hex_decimal_value, NIBBLE_BITS_SIZE);
 	}
 	return binary_str;
 }
@@ -67,7 +67,7 @@ uint base_string_conversions::binary_to_decimal(std::string& binary_str)
 	uint decimal_value = 0;
 	for (int i = (binary_str.length() - 1); i >= 0; i--)
 	{
-		BIT current_bit = binary_str[i];
+		bit current_bit = binary_str[i];
 		if (current_bit == '1')
 		{
 			decimal_value += (1 << (binary_str.length() - i - 1));
@@ -144,21 +144,21 @@ std::string base_string_conversions::base64_to_hex(std::string& base64_str)
 std::string base_string_conversions::binary_to_hex(std::string& binary_str)
 {
 	std::string hex_str;
-	if (binary_str.length() % HEX_DIGIT_BITS_SIZE != 0)
+	if (binary_str.length() % NIBBLE_BITS_SIZE != 0)
 	{
 		throw std::invalid_argument(
-			"binary string len should be a multiplication of " + std::to_string(HEX_DIGIT_BITS_SIZE)
+			"binary string len should be a multiplication of " + std::to_string(NIBBLE_BITS_SIZE)
 		);
 	}
-	for (size_t i = 0; i < binary_str.length(); i += HEX_DIGIT_BITS_SIZE)
+	for (size_t i = 0; i < binary_str.length(); i += NIBBLE_BITS_SIZE)
 	{
 		int hex_value = 0;
-		for (size_t j = 0; j < HEX_DIGIT_BITS_SIZE; j++)
+		for (size_t j = 0; j < NIBBLE_BITS_SIZE; j++)
 		{
-			BIT current_bit = binary_str[i + j];
+			bit current_bit = binary_str[i + j];
 			if (current_bit == '1')
 			{
-				uint exponent = HEX_DIGIT_BITS_SIZE - j - 1;
+				uint exponent = NIBBLE_BITS_SIZE - j - 1;
 				hex_value += 1 << exponent;
 			}
 		}
@@ -177,25 +177,25 @@ std::string base_string_conversions::decimal_to_binary(uint decimal, uint binary
 	return binary_str;
 }
 
-std::vector<BYTE> base_string_conversions::hex_to_bytes(std::string& hex_str)
+std::vector<byte> base_string_conversions::hex_to_bytes(std::string& hex_str)
 {
-	std::vector<BYTE> bytes;
+	std::vector<byte> bytes;
 	std::string binary_str = base_string_conversions::hex_to_binary(hex_str);
 
 	for (size_t i = 0; i < binary_str.length(); i += BYTE_NUM_OF_BITS)
 	{
 		std::string byte_str = binary_str.substr(i, BYTE_NUM_OF_BITS);
-		BYTE byte = base_string_conversions::binary_to_decimal(byte_str);
+		byte byte = base_string_conversions::binary_to_decimal(byte_str);
 		bytes.push_back(byte);
 	}
 	return bytes;
 }
 
-std::string base_string_conversions::bytes_to_hex(std::vector<BYTE>& bytes)
+std::string base_string_conversions::bytes_to_hex(std::vector<byte>& bytes)
 {
 	std::string binary_str;
 
-	for (BYTE byte : bytes)
+	for (byte byte : bytes)
 	{
 		binary_str += base_string_conversions::decimal_to_binary(byte, BYTE_NUM_OF_BITS);
 	}

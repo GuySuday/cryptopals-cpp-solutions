@@ -2,15 +2,15 @@
 #include "utils/base_string_conversions.hpp"
 
 
-BIT xor_utils::xor_char_bits(BIT bit1, BIT bit2)
+bit xor_utils::xor_char_bits(bit bit1, bit bit2)
 {
     return ((bit1 - '0') ^ (bit2 - '0')) + '0';
 }
 
-std::vector<BYTE> xor_utils::xor_bytes_with_key(std::vector<BYTE>& bytes, BYTE ch)
+std::vector<byte> xor_utils::xor_bytes_with_key(std::vector<byte>& bytes, byte ch)
 {
-    std::vector<BYTE> xored_str;
-    for (BYTE byte : bytes)
+    std::vector<byte> xored_str;
+    for (byte byte : bytes)
     {
         xored_str.push_back(byte ^ ch);
     }

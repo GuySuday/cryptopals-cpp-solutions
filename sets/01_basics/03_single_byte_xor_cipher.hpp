@@ -4,7 +4,7 @@
 #include <string> // std::string
 #include <vector> // std::vector
 
-#include "utils/types.hpp" // BYTE
+#include "utils/types.hpp" // byte
 
 namespace s01
 {
@@ -13,9 +13,9 @@ namespace s01
         struct Result
         {
             std::string plaintext;
-            BYTE key;
+            byte key;
         };
-        Result single_byte_xor_cipher(std::vector<BYTE>& bytes);
+        Result single_byte_xor_cipher(std::vector<byte>& bytes);
     };
 };
 #endif /* SETS_01_BASICS_03_SINGLE_BYTE_XOR_CIPHER_HPP_INCLUDED */
