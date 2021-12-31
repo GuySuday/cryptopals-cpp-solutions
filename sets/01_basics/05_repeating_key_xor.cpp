@@ -3,7 +3,7 @@
 
 std::string s01::c05::repeating_key_xor(std::string& plaintext, std::vector<BYTE>& key)
 {
-    unsigned int key_len = key.size();
+    uint key_len = key.size();
     std::string encryped_plaintext_binary;
     for (size_t i = 0; i < plaintext.length(); i++)
     {

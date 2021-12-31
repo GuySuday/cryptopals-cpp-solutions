@@ -4,13 +4,13 @@
 
 #include "crypto_utils.hpp"
 
-unsigned int crypto_utils::hamming_distance(std::vector<BIT>& bits1, std::vector<BIT>& bits2)
+uint crypto_utils::hamming_distance(std::vector<BIT>& bits1, std::vector<BIT>& bits2)
 {
     if (bits1.size() != bits2.size())
     {
         throw std::invalid_argument("both bits streams should be of the same size");
     }
-    unsigned int different_bits = 0;
+    uint different_bits = 0;
     for (size_t i = 0; i < bits1.size(); i++)
     {
         if (bits1[i] != bits2[i])
@@ -27,7 +27,7 @@ enum class AES_ECB_MODE
     DECRYPT
 };
 
-std::vector<BYTE> aes_ecb(std::vector<BYTE>& src_data, std::vector<BYTE>& key, unsigned int key_len, AES_ECB_MODE mode)
+std::vector<BYTE> aes_ecb(std::vector<BYTE>& src_data, std::vector<BYTE>& key, uint key_len, AES_ECB_MODE mode)
 {
     if (key.size() * BYTE_NUM_OF_BITS != key_len)  // TODO: should we just calculate block_size from key.size()?
     {
@@ -70,12 +70,12 @@ std::vector<BYTE> aes_ecb(std::vector<BYTE>& src_data, std::vector<BYTE>& key, u
     return dst_data;
 }
 
-std::vector<BYTE> crypto_utils::aes_ecb_decrypt(std::vector<BYTE>& encrypted_data, std::vector<BYTE>& key, unsigned int key_len)
+std::vector<BYTE> crypto_utils::aes_ecb_decrypt(std::vector<BYTE>& encrypted_data, std::vector<BYTE>& key, uint key_len)
 {
     return aes_ecb(encrypted_data, key, key_len, AES_ECB_MODE::DECRYPT);
 }
 
-std::vector<BYTE> crypto_utils::aes_ecb_encrypt(std::vector<BYTE>& plaintext_data, std::vector<BYTE>& key, unsigned int key_len)
+std::vector<BYTE> crypto_utils::aes_ecb_encrypt(std::vector<BYTE>& plaintext_data, std::vector<BYTE>& key, uint key_len)
 {
     return aes_ecb(plaintext_data, key, key_len, AES_ECB_MODE::ENCRYPT);
 }

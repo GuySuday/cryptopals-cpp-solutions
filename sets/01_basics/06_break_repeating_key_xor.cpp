@@ -9,13 +9,12 @@
 #include "utils/vector_utils.hpp"
 #include "utils/collection_utils.hpp"
 
-const unsigned int KEYSIZE_MIN_VAL = 2;
-const unsigned int KEYSIZE_MAX_VAL = 40;
-const int HEX_DIGIT_BITS_SIZE = 4;
-const int BEST_KEYSIZES_NUM = 4;
-const int ADJACENT_PAIRS_NUM = 3;
+static const uint KEYSIZE_MIN_VAL = 2;
+static const uint KEYSIZE_MAX_VAL = 40;
+static const uint BEST_KEYSIZES_NUM = 4;
+static const uint ADJACENT_PAIRS_NUM = 3;
 
-double calculate_adjacent_blocks_avg_hamming(std::vector<BYTE>& ciphertext_bytes, unsigned int keysize, unsigned int pairs_num)
+double calculate_adjacent_blocks_avg_hamming(std::vector<BYTE>& ciphertext_bytes, uint keysize, uint pairs_num)
 {
     double hamming_distance_sum = 0;
 
@@ -28,12 +27,12 @@ double calculate_adjacent_blocks_avg_hamming(std::vector<BYTE>& ciphertext_bytes
     return hamming_distance_sum / pairs_num;
 }
 
-std::vector<unsigned int> find_best_keysizes(std::vector<BYTE>& ciphertext_bytes, unsigned int n)
+std::vector<uint> find_best_keysizes(std::vector<BYTE>& ciphertext_bytes, uint n)
 {
-    double min_key_score = KEYSIZE_MAX_VAL * HEX_DIGIT_BITS_SIZE;
-    unsigned int keysize = KEYSIZE_MIN_VAL;
-    std::map<unsigned int, double> m;
-    for (unsigned int possible_keysize = KEYSIZE_MIN_VAL; possible_keysize < KEYSIZE_MAX_VAL; possible_keysize++)
+    double min_key_score = KEYSIZE_MAX_VAL * base_string_conversions::HEX_DIGIT_BITS_SIZE;
+    uint keysize = KEYSIZE_MIN_VAL;
+    std::map<uint, double> m;
+    for (uint possible_keysize = KEYSIZE_MIN_VAL; possible_keysize < KEYSIZE_MAX_VAL; possible_keysize++)
     {
         // double avg_key_score = calculate_adjacent_blocks_avg_hamming(ciphertext, possible_keysize, ADJACENT_PAIRS_NUM);
         double avg_key_score = calculate_adjacent_blocks_avg_hamming(ciphertext_bytes, possible_keysize, ADJACENT_PAIRS_NUM);
@@ -43,7 +42,7 @@ std::vector<unsigned int> find_best_keysizes(std::vector<BYTE>& ciphertext_bytes
     return collection_utils::find_smallest_n(m, n);
 }
 
-std::vector<std::vector<BYTE>> split_into_blocks(std::vector<BYTE>& ciphertext, unsigned int block_size)
+std::vector<std::vector<BYTE>> split_into_blocks(std::vector<BYTE>& ciphertext, uint block_size)
 {
     std::vector<std::vector<BYTE>> blocks;
     for (size_t i = 0; i < ciphertext.size(); i += block_size)
@@ -58,15 +57,15 @@ s01::c06::Result s01::c06::break_repeating_key_xor(std::string& ciphertext_base6
 {
     std::string ciphertext_hex = base_string_conversions::base64_to_hex(ciphertext_base64);
     std::vector<BYTE> ciphertext_bytes = base_string_conversions::hex_to_bytes(ciphertext_hex);
-    std::vector<unsigned int> best_keysizes = find_best_keysizes(ciphertext_bytes, BEST_KEYSIZES_NUM);
+    std::vector<uint> best_keysizes = find_best_keysizes(ciphertext_bytes, BEST_KEYSIZES_NUM);
     std::vector<BYTE> key;
 
-    for (unsigned int possible_keysize : best_keysizes)
+    for (uint possible_keysize : best_keysizes)
     {
         std::vector<std::vector<BYTE>> blocks = split_into_blocks(ciphertext_bytes, possible_keysize);
         std::vector<std::vector<BYTE>> transposed_blocks = vector_utils::transpose(blocks);
 
-        for (unsigned int key_pos = 0; key_pos < possible_keysize; key_pos++)
+        for (uint key_pos = 0; key_pos < possible_keysize; key_pos++)
         {
             std::vector<BYTE> same_byte_xor_cipher = transposed_blocks[key_pos];
             try

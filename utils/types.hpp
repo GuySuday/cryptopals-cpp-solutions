@@ -4,6 +4,7 @@
 /* types */
 using BYTE = unsigned char; // TODO: is 'BYTE' the right name here?
 using BIT = unsigned char;
+using uint = unsigned int; // Redefine in case the compiler already defines it
 
 /* types's metrics */
 const int BYTE_NUM_OF_BITS = 8;

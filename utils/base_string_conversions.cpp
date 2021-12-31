@@ -4,11 +4,10 @@
 
 #include "base_string_conversions.hpp"
 
-const int BASE64_TABLE_SIZE = 64;
-const int SEXTET_SIZE = 6;
-const int HEX_NUM_OF_DIGITS = 16;
-const int HEX_DIGIT_BITS_SIZE = 4;
-const unsigned char base64_padding_char = '=';
+static const int BASE64_TABLE_SIZE = 64;
+static const int SEXTET_SIZE = 6;
+static const int HEX_NUM_OF_DIGITS = 16;
+static const unsigned char base64_padding_char = '=';
 std::array<unsigned char, BASE64_TABLE_SIZE> base64_encoding_table =
 {
 	'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
@@ -27,9 +26,9 @@ unsigned char decimal_to_hex_table[HEX_NUM_OF_DIGITS] =
 	'a', 'b', 'c', 'd', 'e', 'f'
 };
 
-unsigned int hex_digit_to_decimal(unsigned char hex_digit)
+uint hex_digit_to_decimal(unsigned char hex_digit)
 {
-	unsigned int decimal_value = 0;
+	uint decimal_value = 0;
 	if (hex_digit >= '0' & hex_digit <= '9')
 	{
 		decimal_value = hex_digit - '0';
@@ -63,9 +62,9 @@ std::string base_string_conversions::hex_to_binary(std::string& hex_str)
 }
 
 
-int base_string_conversions::binary_to_decimal(std::string& binary_str)
+uint base_string_conversions::binary_to_decimal(std::string& binary_str)
 {
-	int decimal_value = 0;
+	uint decimal_value = 0;
 	for (int i = (binary_str.length() - 1); i >= 0; i--)
 	{
 		BIT current_bit = binary_str[i];
@@ -159,7 +158,7 @@ std::string base_string_conversions::binary_to_hex(std::string& binary_str)
 			BIT current_bit = binary_str[i + j];
 			if (current_bit == '1')
 			{
-				unsigned int exponent = HEX_DIGIT_BITS_SIZE - j - 1;
+				uint exponent = HEX_DIGIT_BITS_SIZE - j - 1;
 				hex_value += 1 << exponent;
 			}
 		}
@@ -168,7 +167,7 @@ std::string base_string_conversions::binary_to_hex(std::string& binary_str)
 	return hex_str;
 }
 
-std::string base_string_conversions::decimal_to_binary(int decimal, int binary_length)
+std::string base_string_conversions::decimal_to_binary(uint decimal, uint binary_length)
 {
 	std::string binary_str;
 	for (int j = binary_length - 1; j >= 0; j--)

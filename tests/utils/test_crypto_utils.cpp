@@ -4,18 +4,18 @@
 
 #include "utils/crypto_utils.hpp"
 #include "utils/base_string_conversions.hpp"
-#include "utils/types.hpp" // BIT, BYTE
+#include "utils/types.hpp" // BIT, BYTE, uint
 
-class HammingDistanceTestFixture : public ::testing::TestWithParam<std::tuple<std::string, std::string, unsigned int>> {};
+class HammingDistanceTestFixture : public ::testing::TestWithParam<std::tuple<std::string, std::string, uint>> {};
 TEST_P(HammingDistanceTestFixture, hamming_distance_)
 {
     std::string bits1_str = std::get<0>(GetParam());
     std::string bits2_str = std::get<1>(GetParam());
-    unsigned int expected_difference = std::get<2>(GetParam());
+    uint expected_difference = std::get<2>(GetParam());
 
     std::vector<BIT> bits1(bits1_str.begin(), bits1_str.end());
     std::vector<BIT> bits2(bits2_str.begin(), bits2_str.end());
-    unsigned int difference = crypto_utils::hamming_distance(bits1, bits2);
+    uint difference = crypto_utils::hamming_distance(bits1, bits2);
     EXPECT_EQ(difference, expected_difference);
 }
 
