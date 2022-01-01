@@ -37,5 +37,8 @@ namespace crypto_utils
      * @return The encrypted data
      */
     std::vector<byte> aes_ecb_encrypt(std::vector<byte>& plaintext_data, std::vector<byte>& key, uint key_len);
+
+    std::vector<byte> aes_cbc_decrypt(std::vector<byte>& ciphertext, std::vector<byte>& key, std::vector<byte>& IV, uint key_len);
+    std::vector<byte> aes_cbc_encrypt(std::vector<byte>& plaintext, std::vector<byte>& key, std::vector<byte>& IV, uint key_len);
 };
 #endif /* UTILS_CRYPTO_UTILS_HPP_INCLUDED */
