@@ -18,7 +18,8 @@ s01::c04::Result s01::c04::detect_single_char_xor(std::string& file_path)
 
     while (std::getline(file, hex_str))
     {
-        std::vector<byte> bytes = base_conversions::hex_to_bytes(hex_str);
+        std::vector<nibble> hex(hex_str.begin(), hex_str.end());
+        std::vector<byte> bytes = base_conversions::hex_to_bytes(hex);
         std::string plaintext_str;
         try
         {

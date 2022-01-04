@@ -11,8 +11,9 @@ class Base64ToHexTestFixture : public ::testing::TestWithParam<std::tuple<std::s
 TEST(BaseConversions, hex_to_binary_invalid_hex)
 {
     std::string invalid_hex_str = "not hex";
+    std::vector<nibble> invalid_hex(invalid_hex_str.begin(), invalid_hex_str.end());
     EXPECT_THROW(
-        base_conversions::hex_to_binary(invalid_hex_str),
+        base_conversions::hex_to_binary(invalid_hex),
         std::invalid_argument
     );
 }
@@ -20,22 +21,32 @@ TEST_P(HexToBinaryTestFixture, hex_to_binary)
 {
     std::string hex_str = std::get<0>(GetParam());
     std::string expected_binary_str = std::get<1>(GetParam());
-    std::string binary_str = base_conversions::hex_to_binary(hex_str);
-    EXPECT_EQ(binary_str, expected_binary_str);
+
+    std::vector<nibble> hex(hex_str.begin(), hex_str.end());
+    std::vector<nibble> expected_binary(expected_binary_str.begin(), expected_binary_str.end());
+
+    std::vector<bit> binary = base_conversions::hex_to_binary(hex);
+    EXPECT_EQ(binary, expected_binary);
 }
 TEST_P(BinaryToDecimalTestFixture, binary_to_decimal)
 {
     std::string binary_str = std::get<0>(GetParam());
     int expected_decimal = std::get<1>(GetParam());;
-    int decimal = base_conversions::binary_to_decimal(binary_str);
+
+    std::vector<bit> binary(binary_str.begin(), binary_str.end());
+
+    int decimal = base_conversions::binary_to_decimal(binary);
     EXPECT_EQ(decimal, expected_decimal);
 }
 
 TEST(BaseConversions, binary_to_hex_wrong_length)
 {
     std::string binary_str = "010";
+
+    std::vector<bit> binary(binary_str.begin(), binary_str.end());
+
     EXPECT_THROW(
-        base_conversions::binary_to_hex(binary_str),
+        base_conversions::binary_to_hex(binary),
         std::invalid_argument
     );
 }
@@ -44,16 +55,24 @@ TEST_P(BinaryToHexTestFixture, binary_to_hex)
 {
     std::string binary_str = std::get<0>(GetParam());
     std::string expected_hex_str = std::get<1>(GetParam());
-    std::string hex_str = base_conversions::binary_to_hex(binary_str);
-    EXPECT_EQ(hex_str, expected_hex_str);
+
+    std::vector<bit> binary(binary_str.begin(), binary_str.end());
+    std::vector<nibble> expected_hex(expected_hex_str.begin(), expected_hex_str.end());
+
+    std::vector<nibble> hex = base_conversions::binary_to_hex(binary);
+    EXPECT_EQ(hex, expected_hex);
 }
 
 TEST_P(Base64ToHexTestFixture, base64_to_hex)
 {
     std::string base64_str = std::get<0>(GetParam());
     std::string expected_hex_str = std::get<1>(GetParam());
-    std::string hex_str = base_conversions::base64_to_hex(base64_str);
-    EXPECT_EQ(hex_str, expected_hex_str);
+
+    std::vector<nibble> base64(base64_str.begin(), base64_str.end());
+    std::vector<nibble> expected_hex(expected_hex_str.begin(), expected_hex_str.end());
+
+    std::vector<nibble> hex = base_conversions::base64_to_hex(base64);
+    EXPECT_EQ(hex, expected_hex);
 }
 
 INSTANTIATE_TEST_SUITE_P(

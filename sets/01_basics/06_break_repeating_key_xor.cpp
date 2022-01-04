@@ -56,9 +56,9 @@ std::vector<std::vector<byte>> split_into_blocks(std::vector<byte>& ciphertext, 
     return blocks;
 }
 
-s01::c06::Result s01::c06::break_repeating_key_xor(std::string& ciphertext_base64)
+s01::c06::Result s01::c06::break_repeating_key_xor(std::vector<byte>& ciphertext_base64)
 {
-    std::string ciphertext_hex = base_conversions::base64_to_hex(ciphertext_base64);
+    std::vector<nibble> ciphertext_hex = base_conversions::base64_to_hex(ciphertext_base64);
     std::vector<byte> ciphertext_bytes = base_conversions::hex_to_bytes(ciphertext_hex);
     std::vector<uint> best_keysizes = find_best_keysizes(ciphertext_bytes, BEST_KEYSIZES_NUM);
     std::vector<byte> key;
@@ -84,7 +84,8 @@ s01::c06::Result s01::c06::break_repeating_key_xor(std::string& ciphertext_base6
         }
     }
     std::string ciphertext_bytes_str = std::string(ciphertext_bytes.begin(), ciphertext_bytes.end()); // TODO: should we change repeating_key_xor to receive a vector?
-    std::string plaintext = s01::c05::repeating_key_xor(ciphertext_bytes_str, key);
+    std::vector<byte> plaintext_bytes = s01::c05::repeating_key_xor(ciphertext_bytes_str, key);
+    std::string plaintext = std::string(plaintext_bytes.begin(), plaintext_bytes.end());
     Result result = {
         plaintext,
         key

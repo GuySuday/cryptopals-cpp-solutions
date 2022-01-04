@@ -10,7 +10,7 @@ namespace s02
 {
     namespace c10
     {
-        std::string decrypt_aes_128_cbc(std::vector<byte>& encoded_ciphertext, std::vector<byte>& key, std::vector<byte>& IV);
+        std::vector<nibble> decrypt_aes_128_cbc(std::vector<byte>& encoded_ciphertext, std::vector<byte>& key, std::vector<byte>& IV);
     };
 };
 

@@ -15,7 +15,7 @@ namespace s01
             std::string plaintext;
             std::vector<byte> key;
         };
-        Result break_repeating_key_xor(std::string& ciphertext_base64);
+        Result break_repeating_key_xor(std::vector<byte>& ciphertext_base64);
     };
 };
 #endif /* SETS_01_BASICS_06_BREAK_REPEATING_KEY_XOR_HPP_INCLUDED */

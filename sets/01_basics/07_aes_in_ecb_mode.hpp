@@ -10,7 +10,7 @@ namespace s01
 {
     namespace c07
     {
-        std::string decrypt_aes_128_ecb(std::vector<byte> encoded_ciphertext, std::vector<byte> key);
+        std::vector<byte> decrypt_aes_128_ecb(std::vector<byte>& encoded_ciphertext, std::vector<byte>& key);
     };
 };
 

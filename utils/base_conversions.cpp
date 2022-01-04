@@ -5,7 +5,8 @@
 #include <array> // std::array
 #include <algorithm> // std::find
 
-#include "utils/types.hpp" // byte, nibble, uint
+#include "utils/vector_utils.hpp"
+#include "utils/types.hpp" // byte, nibble, bit, uint
 
 static const int BASE64_TABLE_SIZE = 64;
 static const int SEXTET_SIZE = 6;
@@ -52,78 +53,79 @@ uint nibble_to_decimal(nibble nibble_val)
 }
 
 
-std::string base_conversions::hex_to_binary(std::string& hex_str)
+std::vector<bit> base_conversions::hex_to_binary(std::vector<nibble>& hex_str)
 {
-	std::string binary_str;
+	std::vector<bit> binary_str;
 	int hex_decimal_value = 0;
 	for (nibble hex_digit : hex_str)
 	{
 		hex_decimal_value = nibble_to_decimal(hex_digit);
-		binary_str += base_conversions::decimal_to_binary(hex_decimal_value, NIBBLE_BITS_SIZE);
+		std::vector<bit> current_binary_str = base_conversions::decimal_to_binary(hex_decimal_value, NIBBLE_BITS_SIZE);
+		binary_str.insert(binary_str.end(), current_binary_str.begin(), current_binary_str.end());
 	}
 	return binary_str;
 }
 
 
-uint base_conversions::binary_to_decimal(std::string& binary_str)
+uint base_conversions::binary_to_decimal(std::vector<bit>& binary_str)
 {
 	uint decimal_value = 0;
-	for (int i = (binary_str.length() - 1); i >= 0; i--)
+	for (int i = (binary_str.size() - 1); i >= 0; i--)
 	{
 		bit current_bit = binary_str[i];
 		if (current_bit == '1')
 		{
-			decimal_value += (1 << (binary_str.length() - i - 1));
+			decimal_value += (1 << (binary_str.size() - i - 1));
 		}
 	}
 	return decimal_value;
 }
 
-std::string binary_to_base64(std::string& binary_str)
+std::vector<nibble> binary_to_base64(std::vector<bit>& binary_str)
 {
-	std::string base64_str;
-	for (int i = 0; i < binary_str.length(); i += SEXTET_SIZE)
+	std::vector<nibble> base64_str;
+	for (int i = 0; i < binary_str.size(); i += SEXTET_SIZE)
 	{
-		std::string sextet_str;
-		if (i + SEXTET_SIZE < binary_str.length())
+		std::vector<bit> sextet_str;
+		if (i + SEXTET_SIZE < binary_str.size())
 		{
-			sextet_str = binary_str.substr(i, SEXTET_SIZE);
+			sextet_str = vector_utils::subvector(binary_str, i, SEXTET_SIZE);
 		}
 		else
 		{
 			// padding with zeros
-			int str_portion_size = binary_str.length() - i;
-			sextet_str = binary_str.substr(i, str_portion_size);
-			sextet_str.append(SEXTET_SIZE - str_portion_size, '0');
+			int str_portion_size = binary_str.size() - i;
+			sextet_str = vector_utils::subvector(binary_str, i, str_portion_size);
+			sextet_str.insert(sextet_str.end(), SEXTET_SIZE - str_portion_size, '0');
 		}
 		int decimal_value = base_conversions::binary_to_decimal(sextet_str);
-		base64_str += base64_encoding_table[decimal_value];
+		base64_str.push_back(base64_encoding_table[decimal_value]);
 	}
 	// padding if necessary
-	std::string padding_str;
-	switch (binary_str.length() % 24)
+	std::vector<nibble> padding_str;
+	switch (binary_str.size() % 24)
 	{
 	case 8:
-		padding_str.append(2, base64_padding_char);
+		padding_str.insert(padding_str.end(), 2, base64_padding_char);
 		break;
 	case 16:
-		padding_str.append(1, base64_padding_char);
+		padding_str.insert(padding_str.end(), 1, base64_padding_char);
 		break;
 	}
-	base64_str += padding_str;
+	base64_str.insert(base64_str.end(), padding_str.begin(), padding_str.end());
 	return base64_str;
 }
 
-std::string base_conversions::hex_to_base64(std::string& hex_str)
+std::vector<byte> base_conversions::hex_to_base64(std::vector<nibble>& hex_str)
 {
-	std::string binary_str = base_conversions::hex_to_binary(hex_str);
+	std::vector<bit> binary_str = base_conversions::hex_to_binary(hex_str);
 	return binary_to_base64(binary_str);
 }
 
-std::string base_conversions::base64_to_binary(std::string& base64_str)
+std::vector<bit> base_conversions::base64_to_binary(std::vector<nibble>& base64_str)
 {
-	std::string binary_str;
-	for (size_t i = 0; i < base64_str.length(); i++)
+	std::vector<bit> binary_str;
+	for (size_t i = 0; i < base64_str.size(); i++)
 	{
 		auto it = std::find(base64_encoding_table.begin(), base64_encoding_table.end(), base64_str[i]);
 		if (it == base64_encoding_table.end())
@@ -131,29 +133,29 @@ std::string base_conversions::base64_to_binary(std::string& base64_str)
 			continue;
 		}
 		int decimal = it - base64_encoding_table.begin();
-		std::string sextet_str = base_conversions::decimal_to_binary(decimal, SEXTET_SIZE);
-		binary_str += sextet_str;
+		std::vector<bit> sextet_str = base_conversions::decimal_to_binary(decimal, SEXTET_SIZE);
+		binary_str.insert(binary_str.end(), sextet_str.begin(), sextet_str.end());
 	}
 	// trimming padding
-	return binary_str.substr(0, binary_str.length() - (binary_str.length() % 8));
+	return vector_utils::subvector(binary_str, 0, binary_str.size() - (binary_str.size() % 8));
 }
 
-std::string base_conversions::base64_to_hex(std::string& base64_str)
+std::vector<nibble> base_conversions::base64_to_hex(std::vector<nibble>& base64_str)
 {
-	std::string binary_str = base_conversions::base64_to_binary(base64_str);
+	std::vector<bit> binary_str = base_conversions::base64_to_binary(base64_str);
 	return base_conversions::binary_to_hex(binary_str);
 }
 
-std::string base_conversions::binary_to_hex(std::string& binary_str)
+std::vector<nibble> base_conversions::binary_to_hex(std::vector<bit>& binary_str)
 {
-	std::string hex_str;
-	if (binary_str.length() % NIBBLE_BITS_SIZE != 0)
+	std::vector<nibble> hex_str;
+	if (binary_str.size() % NIBBLE_BITS_SIZE != 0)
 	{
 		throw std::invalid_argument(
 			"binary string len should be a multiplication of " + std::to_string(NIBBLE_BITS_SIZE)
 		);
 	}
-	for (size_t i = 0; i < binary_str.length(); i += NIBBLE_BITS_SIZE)
+	for (size_t i = 0; i < binary_str.size(); i += NIBBLE_BITS_SIZE)
 	{
 		int hex_value = 0;
 		for (size_t j = 0; j < NIBBLE_BITS_SIZE; j++)
@@ -165,42 +167,46 @@ std::string base_conversions::binary_to_hex(std::string& binary_str)
 				hex_value += 1 << exponent;
 			}
 		}
-		hex_str += decimal_to_hex_table[hex_value];
+		hex_str.push_back(decimal_to_hex_table[hex_value]);
 	}
 	return hex_str;
 }
 
-std::string base_conversions::decimal_to_binary(uint decimal, uint binary_length)
+std::vector<bit> base_conversions::decimal_to_binary(uint decimal, uint binary_length)
 {
-	std::string binary_str;
+	std::vector<bit> binary_str;
 	for (int j = binary_length - 1; j >= 0; j--)
 	{
-		binary_str += ((1 << j) & decimal) ? '1' : '0';
+		binary_str.push_back(
+			((1 << j) & decimal) ? '1' : '0'
+		);
 	}
 	return binary_str;
 }
 
-std::vector<byte> base_conversions::hex_to_bytes(std::string& hex_str)
+std::vector<byte> base_conversions::hex_to_bytes(std::vector<nibble>& hex_str)
 {
 	std::vector<byte> bytes;
-	std::string binary_str = base_conversions::hex_to_binary(hex_str);
+	std::vector<bit> binary_str = base_conversions::hex_to_binary(hex_str);
 
-	for (size_t i = 0; i < binary_str.length(); i += BYTE_NUM_OF_BITS)
+	for (size_t i = 0; i < binary_str.size(); i += BYTE_NUM_OF_BITS)
 	{
-		std::string byte_str = binary_str.substr(i, BYTE_NUM_OF_BITS);
+		std::vector<bit> byte_str = vector_utils::subvector(binary_str, i, BYTE_NUM_OF_BITS);
+		// std::string byte_str = binary_str.substr(i, BYTE_NUM_OF_BITS);
 		byte byte = base_conversions::binary_to_decimal(byte_str);
 		bytes.push_back(byte);
 	}
 	return bytes;
 }
 
-std::string base_conversions::bytes_to_hex(std::vector<byte>& bytes)
+std::vector<nibble> base_conversions::bytes_to_hex(std::vector<byte>& bytes)
 {
-	std::string binary_str;
+	std::vector<bit> binary_str;
 
 	for (byte byte : bytes)
 	{
-		binary_str += base_conversions::decimal_to_binary(byte, BYTE_NUM_OF_BITS);
+		std::vector<bit> current_binary_str = base_conversions::decimal_to_binary(byte, BYTE_NUM_OF_BITS);
+		binary_str.insert(binary_str.end(), current_binary_str.begin(), current_binary_str.end());
 	}
 
 	return base_conversions::binary_to_hex(binary_str);

@@ -6,6 +6,7 @@
 #include "utils/types.hpp" // byte
 #include "utils/crypto_utils.hpp"
 #include "utils/base_conversions.hpp"
+#include "utils/vector_utils.hpp"
 
 std::string s01::c08::detect_aes_in_ecb_mode(std::string& file_path)
 {
@@ -19,16 +20,17 @@ std::string s01::c08::detect_aes_in_ecb_mode(std::string& file_path)
 
     while (std::getline(file, hex_str))
     {
-        std::string binary_str = base_conversions::hex_to_binary(hex_str);
+        std::vector<nibble> hex(hex_str.begin(), hex_str.end());
+        std::vector<bit> binary_str = base_conversions::hex_to_binary(hex);
         int num_identical_blocks_hex_str = 0;
 
         for (size_t i = 0; i < binary_str.size(); i += block_size)
         {
-            std::string block1 = binary_str.substr(i, block_size);
+            std::vector<bit> block1 = vector_utils::subvector(binary_str, i, block_size);
 
             for (size_t j = i + block_size; j < binary_str.size(); j += block_size)
             {
-                std::string block2 = binary_str.substr(j, block_size);
+                std::vector<bit> block2 = vector_utils::subvector(binary_str, j, block_size);
                 if (block1 == block2)
                 {
                     num_identical_blocks_hex_str++;

@@ -4,6 +4,7 @@
 #include <tuple> // std::tuple
 
 #include "sets/01_basics/01_hex_to_base64.hpp"
+#include "utils/types.hpp"
 
 class HexToBase64TestFixture : public ::testing::TestWithParam<std::tuple<std::string, std::string>> {};
 
@@ -12,8 +13,11 @@ TEST_P(HexToBase64TestFixture, hex_to_base64)
     std::string hex_str = std::get<0>(GetParam());
     std::string expected_base64_str = std::get<1>(GetParam());
 
-    std::string base64_str = s01::c01::hex_to_base64(hex_str);
-    EXPECT_EQ(base64_str, expected_base64_str);
+    std::vector<nibble> hex(hex_str.begin(), hex_str.end());
+    std::vector<nibble> expected_base64(expected_base64_str.begin(), expected_base64_str.end());
+
+    std::vector<nibble> base64 = s01::c01::hex_to_base64(hex);
+    EXPECT_EQ(base64, expected_base64);
 }
 
 // TODO: find a way to add a suffix name to the test according to its name

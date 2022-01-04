@@ -14,7 +14,10 @@ TEST(BreakRepeatingKeyXor, cryptopals_example)
     std::string expected_key_str = "Terminator X: Bring the noise";
 
     std::vector<byte> expected_key(expected_key_str.begin(), expected_key_str.end());
-    std::string ciphertext_base64 = file_utils::read_file_without_newlines(enctyped_text_file_path);
+    std::string ciphertext_base64_str = file_utils::read_file_without_newlines(enctyped_text_file_path);
+
+    std::vector<byte> ciphertext_base64(ciphertext_base64_str.begin(), ciphertext_base64_str.end());
+
     s01::c06::Result result = s01::c06::break_repeating_key_xor(ciphertext_base64);
 
     EXPECT_EQ(result.plaintext, expected_plaintext_hex);

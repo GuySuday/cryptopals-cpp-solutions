@@ -90,21 +90,21 @@ std::vector<byte> crypto_utils::aes_ecb_encrypt(std::vector<byte>& plaintext_dat
 std::vector<byte> crypto_utils::aes_cbc_decrypt(std::vector<byte>& ciphertext, std::vector<byte>& key, std::vector<byte>& IV, uint key_len)
 {
     std::vector<byte> plaintext;
-    std::string IV_hex = base_conversions::bytes_to_hex(IV);
+    std::vector<nibble> IV_hex = base_conversions::bytes_to_hex(IV);
 
-    std::string previous_ciphertext_block = IV_hex;
+    std::vector<byte> previous_ciphertext_block = IV_hex;
+
     int block_bytes_len = key_len / BYTE_NUM_OF_BITS;
     for (size_t i = 0; i < ciphertext.size(); i += block_bytes_len)
     {
         std::vector<byte> block = vector_utils::subvector(ciphertext, i, block_bytes_len);
         std::vector<byte> decrypted_block = crypto_utils::aes_ecb_decrypt(block, key, key_len);
-        std::string decrypted_block_hex = base_conversions::bytes_to_hex(decrypted_block);
-        // TODO: convert to vector logic
-        std::string plaintext_block_str = xor_utils::fixed_xor(decrypted_block_hex, previous_ciphertext_block);
+        std::vector<nibble> decrypted_block_hex = base_conversions::bytes_to_hex(decrypted_block);
+        std::vector<byte> plaintext_block_str = xor_utils::fixed_xor(decrypted_block_hex, previous_ciphertext_block);
         std::vector<byte> plaintext_block = base_conversions::hex_to_bytes(plaintext_block_str);
         plaintext.insert(plaintext.end(), plaintext_block.begin(), plaintext_block.end());
 
-        previous_ciphertext_block = base_conversions::bytes_to_hex(block); // TODO: convert to vector logic
+        previous_ciphertext_block = base_conversions::bytes_to_hex(block);
     }
 
     return plaintext;
@@ -113,21 +113,20 @@ std::vector<byte> crypto_utils::aes_cbc_decrypt(std::vector<byte>& ciphertext, s
 std::vector<byte> crypto_utils::aes_cbc_encrypt(std::vector<byte>& plaintext, std::vector<byte>& key, std::vector<byte>& IV, uint key_len)
 {
     std::vector<byte> ciphertext;
-    std::string IV_hex = base_conversions::bytes_to_hex(IV);
+    std::vector<nibble> IV_hex = base_conversions::bytes_to_hex(IV);
 
-    std::string previous_ciphertext_block = IV_hex;
+    std::vector<byte> previous_ciphertext_block = IV_hex;
     int block_bytes_len = key_len / BYTE_NUM_OF_BITS;
     for (size_t i = 0; i < plaintext.size(); i += block_bytes_len)
     {
         std::vector<byte> block = vector_utils::subvector(plaintext, i, block_bytes_len);
-        std::string block_hex = base_conversions::bytes_to_hex(block);
-        std::string plaintext_block_str = xor_utils::fixed_xor(block_hex, previous_ciphertext_block);
+        std::vector<nibble> block_hex = base_conversions::bytes_to_hex(block);
+        std::vector<nibble> plaintext_block_str = xor_utils::fixed_xor(block_hex, previous_ciphertext_block);
         std::vector<byte> plaintext_block = base_conversions::hex_to_bytes(plaintext_block_str);
         std::vector<byte> encrypted_block = crypto_utils::aes_ecb_encrypt(plaintext_block, key, key_len);
-        // TODO: convert to vector logic
         ciphertext.insert(ciphertext.end(), encrypted_block.begin(), encrypted_block.end());
 
-        previous_ciphertext_block = base_conversions::bytes_to_hex(encrypted_block); // TODO: convert to vector logic
+        previous_ciphertext_block = base_conversions::bytes_to_hex(encrypted_block);
     }
 
     return ciphertext;
