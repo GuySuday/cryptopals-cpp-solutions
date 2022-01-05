@@ -2,7 +2,7 @@
 #define UTILS_TYPES_HPP_INCLUDED
 
 /* types */
-using byte = unsigned char; // TODO: is 'byte' the right name here?
+using byte = unsigned char;
 using nibble = unsigned char;
 using bit = unsigned char;
 

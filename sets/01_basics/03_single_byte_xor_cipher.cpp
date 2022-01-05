@@ -31,7 +31,7 @@ s01::c03::Result s01::c03::single_byte_xor_cipher(std::vector<byte>& bytes)
     // After finding the key, we can xor again with it to find the plaintext
     std::vector<byte> plaintext = xor_utils::xor_bytes_with_key(bytes, best_key);
     Result result = {
-        std::string(plaintext.begin(), plaintext.end()),
+        std::string(plaintext.begin(), plaintext.end()), // TODO: should plaintext be a string or a vector?
         best_key
     };
     return result;

@@ -1,7 +1,6 @@
 #ifndef SETS_01_BASICS_07_AES_IN_ECB_MODE_HPP_INCLUDED
 #define SETS_01_BASICS_07_AES_IN_ECB_MODE_HPP_INCLUDED
 
-#include <string> // std::string
 #include <vector> // std::vector
 
 #include "utils/types.hpp" // byte

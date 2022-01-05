@@ -13,10 +13,8 @@ std::string s01::c08::detect_aes_in_ecb_mode(std::string& file_path)
     const int block_size = crypto_utils::AES_BLOCK_BITS_LEN;
     std::ifstream file(file_path);
 
-    std::string best_hex;
+    std::string hex_str, best_hex;
     int max_identical_blocks_overall = 0;
-
-    std::string hex_str;
 
     while (std::getline(file, hex_str))
     {

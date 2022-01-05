@@ -85,7 +85,7 @@ s01::c06::Result s01::c06::break_repeating_key_xor(std::vector<byte>& ciphertext
     }
     std::string ciphertext_bytes_str = std::string(ciphertext_bytes.begin(), ciphertext_bytes.end()); // TODO: should we change repeating_key_xor to receive a vector?
     std::vector<byte> plaintext_bytes = s01::c05::repeating_key_xor(ciphertext_bytes_str, key);
-    std::string plaintext = std::string(plaintext_bytes.begin(), plaintext_bytes.end());
+    std::string plaintext = std::string(plaintext_bytes.begin(), plaintext_bytes.end());  // TODO: should plaintext be a string or a vector?
     Result result = {
         plaintext,
         key

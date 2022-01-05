@@ -17,8 +17,8 @@ TEST(DecryptAesECB, cryptopals_example)
 
     std::string encoded_ciphertext_str = file_utils::read_file_without_newlines(encoded_data_file_path);
 
-    std::vector<byte> encoded_ciphertext(encoded_ciphertext_str.begin(), encoded_ciphertext_str.end());
     std::vector<nibble> expected_plaintext_hex(expected_plaintext_hex_str.begin(), expected_plaintext_hex_str.end());
+    std::vector<byte> encoded_ciphertext(encoded_ciphertext_str.begin(), encoded_ciphertext_str.end());
 
     std::vector<byte> key(key_str.begin(), key_str.end());
     std::vector<byte> plaintext_hex = s01::c07::decrypt_aes_128_ecb(encoded_ciphertext, key);

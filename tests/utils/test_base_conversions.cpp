@@ -10,8 +10,7 @@ class Base64ToHexTestFixture : public ::testing::TestWithParam<std::tuple<std::s
 // TODO: is there a way to combine the fixture tests (TEST_P) and the regular tests (TEST) under the same name?
 TEST(BaseConversions, hex_to_binary_invalid_hex)
 {
-    std::string invalid_hex_str = "not hex";
-    std::vector<nibble> invalid_hex(invalid_hex_str.begin(), invalid_hex_str.end());
+    std::string invalid_hex = "not hex";
     EXPECT_THROW(
         base_conversions::hex_to_binary(invalid_hex),
         std::invalid_argument
@@ -19,21 +18,17 @@ TEST(BaseConversions, hex_to_binary_invalid_hex)
 }
 TEST_P(HexToBinaryTestFixture, hex_to_binary)
 {
-    std::string hex_str = std::get<0>(GetParam());
-    std::string expected_binary_str = std::get<1>(GetParam());
+    std::string hex = std::get<0>(GetParam());
+    std::string expected_binary = std::get<1>(GetParam());
 
-    std::vector<nibble> hex(hex_str.begin(), hex_str.end());
-    std::vector<nibble> expected_binary(expected_binary_str.begin(), expected_binary_str.end());
+    std::string binary = base_conversions::hex_to_binary(hex);
 
-    std::vector<bit> binary = base_conversions::hex_to_binary(hex);
     EXPECT_EQ(binary, expected_binary);
 }
 TEST_P(BinaryToDecimalTestFixture, binary_to_decimal)
 {
-    std::string binary_str = std::get<0>(GetParam());
+    std::string binary = std::get<0>(GetParam());
     int expected_decimal = std::get<1>(GetParam());;
-
-    std::vector<bit> binary(binary_str.begin(), binary_str.end());
 
     int decimal = base_conversions::binary_to_decimal(binary);
     EXPECT_EQ(decimal, expected_decimal);
@@ -41,9 +36,7 @@ TEST_P(BinaryToDecimalTestFixture, binary_to_decimal)
 
 TEST(BaseConversions, binary_to_hex_wrong_length)
 {
-    std::string binary_str = "010";
-
-    std::vector<bit> binary(binary_str.begin(), binary_str.end());
+    std::string binary = "010";
 
     EXPECT_THROW(
         base_conversions::binary_to_hex(binary),
@@ -53,25 +46,19 @@ TEST(BaseConversions, binary_to_hex_wrong_length)
 
 TEST_P(BinaryToHexTestFixture, binary_to_hex)
 {
-    std::string binary_str = std::get<0>(GetParam());
-    std::string expected_hex_str = std::get<1>(GetParam());
+    std::string binary = std::get<0>(GetParam());
+    std::string expected_hex = std::get<1>(GetParam());
 
-    std::vector<bit> binary(binary_str.begin(), binary_str.end());
-    std::vector<nibble> expected_hex(expected_hex_str.begin(), expected_hex_str.end());
-
-    std::vector<nibble> hex = base_conversions::binary_to_hex(binary);
+    std::string hex = base_conversions::binary_to_hex(binary);
     EXPECT_EQ(hex, expected_hex);
 }
 
 TEST_P(Base64ToHexTestFixture, base64_to_hex)
 {
-    std::string base64_str = std::get<0>(GetParam());
-    std::string expected_hex_str = std::get<1>(GetParam());
+    std::string base64 = std::get<0>(GetParam());
+    std::string expected_hex = std::get<1>(GetParam());
 
-    std::vector<nibble> base64(base64_str.begin(), base64_str.end());
-    std::vector<nibble> expected_hex(expected_hex_str.begin(), expected_hex_str.end());
-
-    std::vector<nibble> hex = base_conversions::base64_to_hex(base64);
+    std::string hex = base_conversions::base64_to_hex(base64);
     EXPECT_EQ(hex, expected_hex);
 }
 

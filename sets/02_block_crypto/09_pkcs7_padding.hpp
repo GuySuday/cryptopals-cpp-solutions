@@ -2,8 +2,9 @@
 #define SETS_02_BLOCK_CRYPTO_09_PKCS7_PADDING_HPP_INCLUDED
 
 #include <string> // std::string
+#include <vector> // std::vector
 
-#include "utils/types.hpp" // uint
+#include "utils/types.hpp" // byte, uint
 
 namespace s02
 {
@@ -19,6 +20,7 @@ namespace s02
          * @param block_len The desired data size (after the padding)
          * @return The padded data, `block_len` bits long
          */
+        std::vector<byte> pkcs7_padding(std::vector<byte>& data, uint block_len);
         std::string pkcs7_padding(std::string& data, uint block_len);
     };
 };

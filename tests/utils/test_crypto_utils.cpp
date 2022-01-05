@@ -17,6 +17,7 @@ TEST_P(HammingDistanceTestFixture, hamming_distance_)
 
     std::vector<bit> bits1(bits1_str.begin(), bits1_str.end());
     std::vector<bit> bits2(bits2_str.begin(), bits2_str.end());
+
     uint difference = crypto_utils::hamming_distance(bits1, bits2);
     EXPECT_EQ(difference, expected_difference);
 }

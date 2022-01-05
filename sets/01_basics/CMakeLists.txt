@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.0.0)
 
-# TODO: make it scalable
 set(
   headers_sets
   01_hex_to_base64.hpp

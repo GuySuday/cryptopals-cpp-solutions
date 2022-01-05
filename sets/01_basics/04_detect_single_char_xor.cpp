@@ -30,7 +30,7 @@ s01::c04::Result s01::c04::detect_single_char_xor(std::string& file_path)
             // We may skip hex strings that aren't decrypted using a single byte xor
             continue;
         }
-        std::vector<byte> plaintext(plaintext_str.begin(), plaintext_str.end()); // TODO: shouldn't we just change single_byte_xor_cipher to return a vector?
+        std::vector<byte> plaintext(plaintext_str.begin(), plaintext_str.end());  // TODO: should plaintext_str be a string or a vector?
         double current_score = plaintext_score_utils::score_text(plaintext);
         if (current_score > max_score)
         {
@@ -40,7 +40,7 @@ s01::c04::Result s01::c04::detect_single_char_xor(std::string& file_path)
         }
     }
     Result result = {
-        std::string(best_plaintext.begin(), best_plaintext.end()), // TODO: maybe just return a vector?
+        std::string(best_plaintext.begin(), best_plaintext.end()), // TODO: should plaintext be a string or a vector?
         best_hex_str
     };
     return result;

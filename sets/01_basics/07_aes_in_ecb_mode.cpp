@@ -1,6 +1,5 @@
 #include "07_aes_in_ecb_mode.hpp"
 
-#include <string> // std::string
 #include <vector> // std::vector
 
 #include "utils/types.hpp" // byte

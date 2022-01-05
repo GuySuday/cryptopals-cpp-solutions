@@ -10,7 +10,7 @@ using testname = std::string;
 class Pkcs7PaddingTestFixture : public ::testing::TestWithParam<std::tuple<std::string, int, std::string, testname>>
 {
 public:
-    // TODO: is it the best name to name the each test case?
+    // TODO: is it the best way to name each test case?
     struct PrintToStringParamName
     {
         template <class ParamType>

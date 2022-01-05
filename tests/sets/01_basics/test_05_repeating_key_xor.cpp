@@ -14,6 +14,6 @@ TEST(RepeatingKeyXor, cryptopals_example)
 
     std::vector<nibble> extected_encrypted_hex(extected_encrypted_hex_str.begin(), extected_encrypted_hex_str.end());
 
-    std::vector<nibble> encrypted_hex = s01::c05::repeating_key_xor(plaintext, key);
+    std::vector<nibble> encrypted_hex = s01::c05::repeating_key_xor(plaintext, key); // TODO: should repeating_key_xor receive a vector or a string as the plaintext?
     EXPECT_EQ(encrypted_hex, extected_encrypted_hex);
 }

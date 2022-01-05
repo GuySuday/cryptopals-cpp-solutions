@@ -53,11 +53,11 @@ uint nibble_to_decimal(nibble nibble_val)
 }
 
 
-std::vector<bit> base_conversions::hex_to_binary(std::vector<nibble>& hex_str)
+std::vector<bit> base_conversions::hex_to_binary(std::vector<nibble>& hex)
 {
 	std::vector<bit> binary_str;
 	int hex_decimal_value = 0;
-	for (nibble hex_digit : hex_str)
+	for (nibble hex_digit : hex)
 	{
 		hex_decimal_value = nibble_to_decimal(hex_digit);
 		std::vector<bit> current_binary_str = base_conversions::decimal_to_binary(hex_decimal_value, NIBBLE_BITS_SIZE);
@@ -67,19 +67,34 @@ std::vector<bit> base_conversions::hex_to_binary(std::vector<nibble>& hex_str)
 }
 
 
-uint base_conversions::binary_to_decimal(std::vector<bit>& binary_str)
+std::string base_conversions::hex_to_binary(std::string& hex)
+{
+	std::vector<nibble> hex_vector(hex.begin(), hex.end());
+	std::vector<bit> binary = base_conversions::hex_to_binary(hex_vector);
+	return std::string(binary.begin(), binary.end());
+}
+
+
+uint base_conversions::binary_to_decimal(std::vector<bit>& binary)
 {
 	uint decimal_value = 0;
-	for (int i = (binary_str.size() - 1); i >= 0; i--)
+	for (int i = (binary.size() - 1); i >= 0; i--)
 	{
-		bit current_bit = binary_str[i];
+		bit current_bit = binary[i];
 		if (current_bit == '1')
 		{
-			decimal_value += (1 << (binary_str.size() - i - 1));
+			decimal_value += (1 << (binary.size() - i - 1));
 		}
 	}
 	return decimal_value;
 }
+
+uint base_conversions::binary_to_decimal(std::string& binary)
+{
+	std::vector<bit> binary_vector(binary.begin(), binary.end());
+	return base_conversions::binary_to_decimal(binary_vector);
+}
+
 
 std::vector<nibble> binary_to_base64(std::vector<bit>& binary_str)
 {
@@ -116,11 +131,19 @@ std::vector<nibble> binary_to_base64(std::vector<bit>& binary_str)
 	return base64_str;
 }
 
-std::vector<byte> base_conversions::hex_to_base64(std::vector<nibble>& hex_str)
+std::vector<byte> base_conversions::hex_to_base64(std::vector<nibble>& hex)
 {
-	std::vector<bit> binary_str = base_conversions::hex_to_binary(hex_str);
+	std::vector<bit> binary_str = base_conversions::hex_to_binary(hex);
 	return binary_to_base64(binary_str);
 }
+
+std::string base_conversions::hex_to_base64(std::string& hex)
+{
+	std::vector<nibble> hex_vector(hex.begin(), hex.end());
+	std::vector<bit> base64 = base_conversions::hex_to_base64(hex_vector);
+	return std::string(base64.begin(), base64.end());
+}
+
 
 std::vector<bit> base_conversions::base64_to_binary(std::vector<nibble>& base64_str)
 {
@@ -140,27 +163,35 @@ std::vector<bit> base_conversions::base64_to_binary(std::vector<nibble>& base64_
 	return vector_utils::subvector(binary_str, 0, binary_str.size() - (binary_str.size() % 8));
 }
 
-std::vector<nibble> base_conversions::base64_to_hex(std::vector<nibble>& base64_str)
+std::vector<nibble> base_conversions::base64_to_hex(std::vector<nibble>& base64)
 {
-	std::vector<bit> binary_str = base_conversions::base64_to_binary(base64_str);
-	return base_conversions::binary_to_hex(binary_str);
+	std::vector<bit> binary = base_conversions::base64_to_binary(base64);
+	return base_conversions::binary_to_hex(binary);
 }
 
-std::vector<nibble> base_conversions::binary_to_hex(std::vector<bit>& binary_str)
+std::string base_conversions::base64_to_hex(std::string& base64)
+{
+	std::vector<nibble> base64_vector(base64.begin(), base64.end());
+	std::vector<bit> hex = base_conversions::base64_to_hex(base64_vector);
+	return std::string(hex.begin(), hex.end());
+}
+
+
+std::vector<nibble> base_conversions::binary_to_hex(std::vector<bit>& binary)
 {
 	std::vector<nibble> hex_str;
-	if (binary_str.size() % NIBBLE_BITS_SIZE != 0)
+	if (binary.size() % NIBBLE_BITS_SIZE != 0)
 	{
 		throw std::invalid_argument(
 			"binary string len should be a multiplication of " + std::to_string(NIBBLE_BITS_SIZE)
 		);
 	}
-	for (size_t i = 0; i < binary_str.size(); i += NIBBLE_BITS_SIZE)
+	for (size_t i = 0; i < binary.size(); i += NIBBLE_BITS_SIZE)
 	{
 		int hex_value = 0;
 		for (size_t j = 0; j < NIBBLE_BITS_SIZE; j++)
 		{
-			bit current_bit = binary_str[i + j];
+			bit current_bit = binary[i + j];
 			if (current_bit == '1')
 			{
 				uint exponent = NIBBLE_BITS_SIZE - j - 1;
@@ -171,6 +202,14 @@ std::vector<nibble> base_conversions::binary_to_hex(std::vector<bit>& binary_str
 	}
 	return hex_str;
 }
+
+std::string base_conversions::binary_to_hex(std::string& binary)
+{
+	std::vector<nibble> binary_vector(binary.begin(), binary.end());
+	std::vector<bit> hex = base_conversions::binary_to_hex(binary_vector);
+	return std::string(hex.begin(), hex.end());
+}
+
 
 std::vector<bit> base_conversions::decimal_to_binary(uint decimal, uint binary_length)
 {
@@ -199,6 +238,13 @@ std::vector<byte> base_conversions::hex_to_bytes(std::vector<nibble>& hex_str)
 	return bytes;
 }
 
+std::string base_conversions::hex_to_bytes(std::string& hex_str)
+{
+	std::vector<nibble> hex_vector(hex_str.begin(), hex_str.end());
+	std::vector<byte> bytes = base_conversions::hex_to_bytes(hex_vector);
+	return std::string(bytes.begin(), bytes.end());
+}
+
 std::vector<nibble> base_conversions::bytes_to_hex(std::vector<byte>& bytes)
 {
 	std::vector<bit> binary_str;
@@ -210,4 +256,11 @@ std::vector<nibble> base_conversions::bytes_to_hex(std::vector<byte>& bytes)
 	}
 
 	return base_conversions::binary_to_hex(binary_str);
+}
+
+std::string base_conversions::bytes_to_hex(std::string& bytes)
+{
+	std::vector<byte> bytes_vector(bytes.begin(), bytes.end());
+	std::vector<nibble> hex = base_conversions::bytes_to_hex(bytes_vector);
+	return std::string(hex.begin(), hex.end());
 }
