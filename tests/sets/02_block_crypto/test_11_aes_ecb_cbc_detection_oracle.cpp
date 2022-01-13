@@ -10,9 +10,10 @@
 using std::uint8_t;
 
 #include "sets/02_block_crypto/11_aes_ecb_cbc_detection_oracle.hpp"
+#include "utils/aes/cbc.hpp"
+#include "utils/aes/ecb.hpp"
 #include "utils/base_conversions.hpp"
 #include "utils/types.hpp" // byte
-#include "utils/crypto_utils.hpp"
 
 int get_random(int min, int max)
 {
@@ -59,14 +60,14 @@ OracleResult encryption_oracle(std::string& plaintext_str)
     case 0:
         // ECB
         oracle_result.encryption_mode = s02::c11::BlockCipherMode::ECB;
-        oracle_result.ciphertext = crypto_utils::aes_ecb_encrypt(wrapped_plaintext, random_key, 128);
+        oracle_result.ciphertext = aes::ecb::encrypt(wrapped_plaintext, random_key, 128);
         break;
     case 1:
     {
         // CBC
         oracle_result.encryption_mode = s02::c11::BlockCipherMode::CBC;
         std::vector<byte> random_IV = get_random_bytes(16);
-        oracle_result.ciphertext = crypto_utils::aes_cbc_encrypt(wrapped_plaintext, random_key, random_IV, 128);
+        oracle_result.ciphertext = aes::cbc::encrypt(wrapped_plaintext, random_key, random_IV, 128);
         break;
     }
     default:

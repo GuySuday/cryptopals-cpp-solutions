@@ -8,11 +8,11 @@ using std::size_t;
 
 #include "utils/types.hpp" // byte
 #include "utils/base_conversions.hpp"
-#include "utils/crypto_utils.hpp"
+#include "utils/padding.hpp"
 
 std::vector<byte> s02::c09::pkcs7_padding(std::vector<byte>& data, size_t block_size)
 {
-    return crypto_utils::pkcs7_padding(data, block_size);
+    return padding::pkcs7_padding(data, block_size);
 }
 
 std::string s02::c09::pkcs7_padding(std::string& data_str, size_t block_size)

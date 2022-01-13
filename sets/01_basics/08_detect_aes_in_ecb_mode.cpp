@@ -6,8 +6,8 @@
 
 using std::size_t;
 
+#include "utils/aes/ecb.hpp"
 #include "utils/types.hpp" // byte, nibble, bit
-#include "utils/crypto_utils.hpp"
 #include "utils/base_conversions.hpp"
 #include "utils/vector_utils.hpp"
 
@@ -26,6 +26,6 @@ std::string s01::c08::detect_aes_in_ecb_mode(std::string& file_path)
         ciphertexts.push_back(ciphertext);
         ciphertexts_hex.push_back(hex_str);
     }
-    size_t best_index = crypto_utils::detect_aes_ecb(ciphertexts);
+    size_t best_index = aes::ecb::detect_aes_ecb(ciphertexts);
     return ciphertexts_hex[best_index];
 }

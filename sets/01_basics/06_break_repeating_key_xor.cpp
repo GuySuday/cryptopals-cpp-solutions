@@ -10,7 +10,7 @@
 #include "05_repeating_key_xor.hpp"
 #include "utils/types.hpp" // byte, nibble, bit
 #include "utils/base_conversions.hpp"
-#include "utils/crypto_utils.hpp"
+#include "utils/edit_distances.hpp"
 #include "utils/vector_utils.hpp"
 #include "utils/collection_utils.hpp"
 
@@ -30,7 +30,7 @@ double calculate_adjacent_blocks_avg_hamming(std::vector<byte>& ciphertext_bytes
     {
         std::vector<bit> first_block = vector_utils::subvector(ciphertext_bytes, i * keysize, keysize);
         std::vector<bit> second_block = vector_utils::subvector(ciphertext_bytes, (i + 1) * keysize, keysize);
-        hamming_distance_sum += crypto_utils::hamming_distance(first_block, second_block);
+        hamming_distance_sum += edit_distances::hamming_distance(first_block, second_block);
     }
     return hamming_distance_sum / pairs_num;
 }

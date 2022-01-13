@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.0.0)
 
 set(CMAKE_CXX_STANDARD 11)
 
+add_subdirectory(aes)
+
 # TODO: should we use file(...) here to make is scalable?
 set(
     Headers_utils
@@ -9,22 +11,22 @@ set(
     xor_utils.hpp
     plaintext_score_utils.hpp
     types.hpp
-    crypto_utils.hpp
+    edit_distances.hpp
     file_utils.hpp
     vector_utils.hpp
     collection_utils.hpp
+    padding.hpp
 )
 set(
     Sources_utils
     base_conversions.cpp
     plaintext_score_utils.cpp
     xor_utils.cpp
-    crypto_utils.cpp
+    edit_distances.cpp
     file_utils.cpp
+    padding.cpp
 )
 
-# TODO: condiser seperating the crypto_utils from the rest of the utils and link openssl only to it
 add_library(${This} UTILS ${Headers_utils} ${Sources_utils})
-find_package(OpenSSL REQUIRED)
 
-target_link_libraries(UTILS OpenSSL::SSL)
+target_link_libraries(UTILS AES_UTILS)

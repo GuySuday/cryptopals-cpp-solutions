@@ -4,9 +4,9 @@
 #include <vector> // std::vector
 
 #include "sets/02_block_crypto/10_aes_in_cbc_mode.hpp"
+#include "utils/aes/cbc.hpp"
 #include "utils/base_conversions.hpp"
 #include "utils/file_utils.hpp"
-#include "utils/crypto_utils.hpp"
 #include "utils/types.hpp" // byte, nibble
 
 TEST(DecryptAesCBC, cryptopals_example)
@@ -27,7 +27,7 @@ TEST(DecryptAesCBC, cryptopals_example)
     EXPECT_EQ(plaintext_hex, expected_plaintext_hex);
 
     std::vector<byte> plaintext_data = base_conversions::hex_to_bytes(plaintext_hex);
-    std::vector<byte> decryped_data = crypto_utils::aes_cbc_encrypt(plaintext_data, key, IV, 128);
+    std::vector<byte> decryped_data = aes::cbc::encrypt(plaintext_data, key, IV, 128);
     std::vector<nibble> decryped_data_hex = base_conversions::bytes_to_hex(decryped_data);
     std::vector<nibble> encoded_decrypted_str = base_conversions::hex_to_base64(decryped_data_hex);
 
