@@ -36,9 +36,10 @@ INSTANTIATE_TEST_SUITE_P(
     Pkcs7PaddingTestFixture,
     ::testing::Values(
         std::make_tuple("YELLOW SUBMARINE", 20, "YELLOW SUBMARINE\x04\x04\x04\x04", "cryptopals_example"),
+        std::make_tuple("YELLOW SUBMARINE", 10, "YELLOW SUBMARINE\x04\x04\x04\x04", "padding"),
         std::make_tuple("YELLOW SUBMARINE", 16, "YELLOW SUBMARINE", "no_padding_exact"),
+        std::make_tuple("YELLOW SUBMARINE", 8, "YELLOW SUBMARINE", "no_padding_multiple"),
         std::make_tuple("YELLOW SUBMARINE", 17, "YELLOW SUBMARINE\x01", "one_padding"),
-        std::make_tuple("YELLOW SUBMARINE", 18, "YELLOW SUBMARINE\x02\x02", "two_padding"),
-        std::make_tuple("YELLOW SUBMARINE", 10, "YELLOW SUBMARINE", "no_padding_shorter")
+        std::make_tuple("YELLOW SUBMARINE", 18, "YELLOW SUBMARINE\x02\x02", "two_padding")
     ), Pkcs7PaddingTestFixture::PrintToStringParamName()
 );

@@ -246,7 +246,6 @@ std::vector<byte> base_conversions::hex_to_bytes(std::vector<nibble>& hex_str)
 	for (size_t i = 0; i < binary_str.size(); i += BYTE_BITS_SIZE)
 	{
 		std::vector<bit> byte_str = vector_utils::subvector(binary_str, i, BYTE_BITS_SIZE);
-		// std::string byte_str = binary_str.substr(i, BYTE_BITS_SIZE);
 		byte byte = base_conversions::binary_to_decimal(byte_str);
 		bytes.push_back(byte);
 	}

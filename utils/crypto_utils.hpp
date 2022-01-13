@@ -43,5 +43,20 @@ namespace crypto_utils
 
     std::vector<byte> aes_cbc_decrypt(std::vector<byte>& ciphertext, std::vector<byte>& key, std::vector<byte>& IV, int key_size);
     std::vector<byte> aes_cbc_encrypt(std::vector<byte>& plaintext, std::vector<byte>& key, std::vector<byte>& IV, int key_size);
+
+    std::size_t detect_aes_ecb(std::vector<std::vector<byte>>& ciphertexts);
+
+    /**
+     * Appends padding to `data` so it is can be divided into blocks of `block_size` bits long,
+     * using the pkcs7 padding scheme:
+     * appending the number of bytes of padding to the end of data.
+     * If case `data` doesn't need padding (its size is a multiple of `block_size`), `data` is returned.
+     * E.g: "abc" padded into 5 will be "abc\x02\x02".
+     *
+     * @param data The data to be padded
+     * @param block_size The desired block size of `data`
+     * @return The padded data (its size is a multiple of `block_size`)
+     */
+    std::vector<byte> pkcs7_padding(std::vector<byte>& data, size_t block_size);
 };
 #endif /* UTILS_CRYPTO_UTILS_HPP_INCLUDED */
