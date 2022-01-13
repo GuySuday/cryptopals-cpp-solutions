@@ -14,7 +14,7 @@ I decided to implement them in C++.
 | Set #            | Challenges # | Solved | Total |
 | :--------------- | :----------: | :----: | :---: |
 | (1) Basics       |     1-8      |   8    |   8   |
-| (2) Block Crypto |     9-16     |   1    |   8   |
+| (2) Block Crypto |     9-16     |   3    |   8   |
 
 ## Setup
 ### Linux
