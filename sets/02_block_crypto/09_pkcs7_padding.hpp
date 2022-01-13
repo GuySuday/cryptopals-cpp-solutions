@@ -3,8 +3,9 @@
 
 #include <string> // std::string
 #include <vector> // std::vector
+#include <cstddef> // std::size_t
 
-#include "utils/types.hpp" // byte, uint
+#include "utils/types.hpp" // byte
 
 namespace s02
 {
@@ -20,8 +21,8 @@ namespace s02
          * @param block_len The desired data size (after the padding)
          * @return The padded data, `block_len` bits long
          */
-        std::vector<byte> pkcs7_padding(std::vector<byte>& data, uint block_len);
-        std::string pkcs7_padding(std::string& data, uint block_len);
+        std::vector<byte> pkcs7_padding(std::vector<byte>& data, std::size_t block_len);
+        std::string pkcs7_padding(std::string& data, std::size_t block_len);
     };
 };
 

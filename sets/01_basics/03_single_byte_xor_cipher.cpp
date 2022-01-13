@@ -3,6 +3,7 @@
 #include <stdexcept> // std::runtime_error
 #include <string> // std::string
 #include <vector> // std::vector
+#include <cstdint> // UINT8_MAX
 
 #include "utils/types.hpp" // byte
 #include "utils/xor_utils.hpp"
@@ -13,8 +14,8 @@ s01::c03::Result s01::c03::single_byte_xor_cipher(std::vector<byte>& bytes)
 {
     double max_score = 0; // TODO: double or float?
     byte best_key = 0;
-
-    for (byte key = 0; key < POSSIBLE_BYTES_NUM - 1; key++)
+    byte key = 0;
+    do // TODO: is this the best way to prevent overflow?
     {
         std::vector<byte> possible_text = xor_utils::xor_bytes_with_key(bytes, key);
         double current_score = plaintext_score_utils::score_text(possible_text);
@@ -23,7 +24,8 @@ s01::c03::Result s01::c03::single_byte_xor_cipher(std::vector<byte>& bytes)
             max_score = current_score;
             best_key = key;
         }
-    }
+    } while (++key != 0);
+
     if (max_score == 0)
     {
         throw std::runtime_error("couldn't find a key that decrypts the cipher");

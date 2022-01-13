@@ -3,8 +3,6 @@
 
 #include <string> // std::string
 
-#include "utils/types.hpp" // byte
-
 namespace s01
 {
     namespace c08

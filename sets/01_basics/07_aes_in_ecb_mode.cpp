@@ -2,7 +2,7 @@
 
 #include <vector> // std::vector
 
-#include "utils/types.hpp" // byte
+#include "utils/types.hpp" // byte, nibble
 #include "utils/crypto_utils.hpp"
 #include "utils/base_conversions.hpp"
 

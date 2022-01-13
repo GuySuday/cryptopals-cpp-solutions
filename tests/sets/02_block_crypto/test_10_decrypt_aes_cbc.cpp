@@ -7,7 +7,7 @@
 #include "utils/base_conversions.hpp"
 #include "utils/file_utils.hpp"
 #include "utils/crypto_utils.hpp"
-#include "utils/types.hpp" // byte
+#include "utils/types.hpp" // byte, nibble
 
 TEST(DecryptAesCBC, cryptopals_example)
 {

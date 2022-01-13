@@ -4,7 +4,7 @@
 #include <string> // std::string
 #include <stdexcept> // std::invalid_argument
 
-#include "utils/types.hpp" // bit, byte
+#include "utils/types.hpp" // byte, nibble, bit
 #include "utils/base_conversions.hpp"
 
 bit xor_utils::xor_char_bits(bit bit1, bit bit2)

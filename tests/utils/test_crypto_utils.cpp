@@ -3,22 +3,25 @@
 #include <vector> // std::vector
 #include <string> // std::string
 #include <tuple> // std::tuple
+#include <cstddef> // std::size_t
 
 #include "utils/crypto_utils.hpp"
 #include "utils/base_conversions.hpp"
-#include "utils/types.hpp" // bit, byte, uint
+#include "utils/types.hpp" // byte, nibble, bit
 
-class HammingDistanceTestFixture : public ::testing::TestWithParam<std::tuple<std::string, std::string, uint>> {};
+using std::size_t;
+
+class HammingDistanceTestFixture : public ::testing::TestWithParam<std::tuple<std::string, std::string, size_t>> {};
 TEST_P(HammingDistanceTestFixture, hamming_distance_)
 {
     std::string bits1_str = std::get<0>(GetParam());
     std::string bits2_str = std::get<1>(GetParam());
-    uint expected_difference = std::get<2>(GetParam());
+    size_t expected_difference = std::get<2>(GetParam());
 
     std::vector<bit> bits1(bits1_str.begin(), bits1_str.end());
     std::vector<bit> bits2(bits2_str.begin(), bits2_str.end());
 
-    uint difference = crypto_utils::hamming_distance(bits1, bits2);
+    size_t difference = crypto_utils::hamming_distance(bits1, bits2);
     EXPECT_EQ(difference, expected_difference);
 }
 

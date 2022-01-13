@@ -2,7 +2,7 @@
 
 #include <vector> // std::vector
 
-#include "utils/types.hpp" // byte, nibble
+#include "utils/types.hpp" // nibble
 #include "utils/base_conversions.hpp"
 
 std::vector<nibble> s01::c01::hex_to_base64(std::vector<nibble>& hex)

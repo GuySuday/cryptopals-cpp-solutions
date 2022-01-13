@@ -1,8 +1,11 @@
 #include <gtest/gtest.h>
+#include <cstdint> // std::uint64_t
+
+using std::uint64_t;
 
 #include "utils/base_conversions.hpp"
 
-class BinaryToDecimalTestFixture : public ::testing::TestWithParam<std::tuple<std::string, int>> {};
+class BinaryToDecimalTestFixture : public ::testing::TestWithParam<std::tuple<std::string, uint64_t>> {};
 class BinaryToHexTestFixture : public ::testing::TestWithParam<std::tuple<std::string, std::string>> {};
 class HexToBinaryTestFixture : public ::testing::TestWithParam<std::tuple<std::string, std::string>> {};
 class Base64ToHexTestFixture : public ::testing::TestWithParam<std::tuple<std::string, std::string>> {};
@@ -28,9 +31,9 @@ TEST_P(HexToBinaryTestFixture, hex_to_binary)
 TEST_P(BinaryToDecimalTestFixture, binary_to_decimal)
 {
     std::string binary = std::get<0>(GetParam());
-    int expected_decimal = std::get<1>(GetParam());;
+    uint64_t expected_decimal = std::get<1>(GetParam());;
 
-    int decimal = base_conversions::binary_to_decimal(binary);
+    uint64_t decimal = base_conversions::binary_to_decimal(binary);
     EXPECT_EQ(decimal, expected_decimal);
 }
 

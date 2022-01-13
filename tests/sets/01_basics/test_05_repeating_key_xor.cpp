@@ -4,7 +4,7 @@
 #include <vector> // std::vector
 
 #include "sets/01_basics/05_repeating_key_xor.hpp"
-#include "utils/types.hpp" // byte
+#include "utils/types.hpp" // byte, nibble
 
 TEST(RepeatingKeyXor, cryptopals_example)
 {

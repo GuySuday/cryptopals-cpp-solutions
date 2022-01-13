@@ -40,18 +40,17 @@ enum class PLAINTEXT_ASCII_CHAR_CLASSIFIER
     ENGLISH_LETTER
 };
 
-bool num_in_range(int num, int lower, int upper)
+bool num_in_range(int num, int lower, int upper) // TODO: change int
 {
     return (lower <= num) && (num <= upper);
 }
 
 PLAINTEXT_ASCII_CHAR_CLASSIFIER classify_plaintext_ascii_char(byte byte, bool extended_ascii = false)
 {
-    if
-        (
-            num_in_range(byte, ASCII_CHARACTERS::FIRST_CONTROL, ASCII_CHARACTERS::LAST_CONTROL) ||
-            byte == ASCII_CHARACTERS::DELETE_CONTROL
-            )
+    if (
+        num_in_range(byte, ASCII_CHARACTERS::FIRST_CONTROL, ASCII_CHARACTERS::LAST_CONTROL) ||
+        byte == ASCII_CHARACTERS::DELETE_CONTROL
+        )
     {
         if (byte == ASCII_CHARACTERS::LINEFEED_CONTROL || byte == ASCII_CHARACTERS::HORIZONTAL_TAB_CONTROL)
         {
@@ -59,11 +58,10 @@ PLAINTEXT_ASCII_CHAR_CLASSIFIER classify_plaintext_ascii_char(byte byte, bool ex
         }
         return PLAINTEXT_ASCII_CHAR_CLASSIFIER::IMPOSSIBLE;
     }
-    else if
-        (
-            num_in_range(byte, ASCII_CHARACTERS::FIRST_LOWERCASE_ABC, ASCII_CHARACTERS::LAST_LOWERCASE_ABC) ||
-            num_in_range(byte, ASCII_CHARACTERS::FIRST_UPPERCASE_ABC, ASCII_CHARACTERS::LAST_UPPERCASE_ABC)
-            )
+    else if (
+        num_in_range(byte, ASCII_CHARACTERS::FIRST_LOWERCASE_ABC, ASCII_CHARACTERS::LAST_LOWERCASE_ABC) ||
+        num_in_range(byte, ASCII_CHARACTERS::FIRST_UPPERCASE_ABC, ASCII_CHARACTERS::LAST_UPPERCASE_ABC)
+        )
     {
         return PLAINTEXT_ASCII_CHAR_CLASSIFIER::ENGLISH_LETTER;
     }

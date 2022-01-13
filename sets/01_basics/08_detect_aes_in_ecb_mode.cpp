@@ -2,15 +2,18 @@
 
 #include <fstream> // std::ifstream
 #include <string> // std::string
+#include <cstddef> // std::size_t
 
-#include "utils/types.hpp" // byte
+using std::size_t;
+
+#include "utils/types.hpp" // byte, nibble, bit
 #include "utils/crypto_utils.hpp"
 #include "utils/base_conversions.hpp"
 #include "utils/vector_utils.hpp"
 
 std::string s01::c08::detect_aes_in_ecb_mode(std::string& file_path)
 {
-    const int block_size = crypto_utils::AES_BLOCK_BITS_LEN;
+    const int block_size = crypto_utils::AES_BLOCK_SIZE_BITS;
     std::ifstream file(file_path);
 
     std::string hex_str, best_hex;

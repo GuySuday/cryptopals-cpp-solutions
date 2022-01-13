@@ -4,6 +4,7 @@
 #include <vector> // std::vector
 #include <stdexcept> // std::invalid_argument
 #include <algorithm> // std::min
+#include <cstddef> // std::size_t
 
 namespace vector_utils
 {
@@ -19,7 +20,7 @@ namespace vector_utils
      * @return A sub-vector of `vector`, starting from position `start` including `num` elements.
      */
     template<typename T>
-    std::vector<T> subvector(std::vector<T> vector, size_t start, size_t num)
+    std::vector<T> subvector(std::vector<T> vector, std::size_t start, std::size_t num)
     {
         auto end = std::min(vector.size(), start + num);
         std::vector<T> sub_vector(vector.begin() + start, vector.begin() + end);
@@ -43,9 +44,9 @@ namespace vector_utils
 
         std::vector<std::vector<T>> transposed_matrix(matrix[0].size(), std::vector<T>());
 
-        for (int i = 0; i < matrix.size(); i++)
+        for (std::size_t i = 0; i < matrix.size(); i++)
         {
-            for (int j = 0; j < matrix[i].size(); j++)
+            for (std::size_t j = 0; j < matrix[i].size(); j++)
             {
                 transposed_matrix[j].push_back(matrix[i][j]);
             }

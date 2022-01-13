@@ -4,7 +4,7 @@
 #include <vector> // std::vector
 #include <string> // std::string
 
-#include "utils/types.hpp" // byte, nibble
+#include "utils/types.hpp" // nibble
 
 namespace s01
 {

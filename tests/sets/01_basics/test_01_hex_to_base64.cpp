@@ -4,7 +4,6 @@
 #include <tuple> // std::tuple
 
 #include "sets/01_basics/01_hex_to_base64.hpp"
-#include "utils/types.hpp"
 
 class HexToBase64TestFixture : public ::testing::TestWithParam<std::tuple<std::string, std::string>> {};
 
